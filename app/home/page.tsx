@@ -1,7 +1,9 @@
-import { Box } from "@mui/material"
-
+import { Box } from "@mui/material";
+import {gameList} from '@/mock/gameList';
+import SparkSwiper from '@/components/SparkSwiper';
 
 const Index = () => {
+
 
 
     return (
@@ -16,9 +18,13 @@ const Index = () => {
             }}>
                 
             </Box>
-            <Box sx={{maxWidth:'1200px',margin:'0 auto'}}>
-                    11sdsd
-            </Box>
+            <div className=" w-full max-w-[1200px] mx-auto ">
+                    {/* 11sdsd */}
+
+                <SparkSwiper
+                    list={gameList}
+                />
+            </div>
         </Box>
     )
 }

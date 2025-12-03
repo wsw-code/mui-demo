@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid 一行8个严格不换行滚动</title>
+  <!-- 引入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入 Font Awesome 图标 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 自定义配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#165DFF',
+            secondary: '#6B7280',
+            light: '#F3F4F6',
+            dark: '#1F2937'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      /* 自定义滚动条样式 */
+      .scrollbar-thin {
+        scrollbar-width: thin;
+      }
+      .scrollbar-thin::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: rgba(156, 163, 175, 0.5);
+        border-radius: 2px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      /* 关键：严格一行8列，不换行，超出滚动 */
+      .grid-scroll-single-row {
+        display: grid;
+        /* 固定8列，每列最小宽度80px，确保不会挤压过窄 */
+        grid-template-columns: repeat(8, minmax(80px, 1fr));
+        gap: 1rem;
+        /* 关键属性：禁止自动换行 */
+        grid-auto-flow: column;
+        /* 允许横向滚动，隐藏纵向滚动 */
+        overflow-x: auto;
+        overflow-y: hidden;
+        /* 平滑滚动 */
+        scroll-behavior: smooth;
+        /* 触摸设备惯性滚动 */
+        -webkit-overflow-scrolling: touch;
+        /* 防止内边距影响滚动 */
+        padding-bottom: 8px;
+      }
+      
+      /* Grid 项目样式 */
+      .grid-item-fixed {
+        /* 固定高度，与宽度保持比例 */
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body class="font-inter bg-gray-50 text-dark min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-full">
+    <!-- 标题区域 -->
+    <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+      <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark">Grid 严格一行8个滚动</h2>
+      <p class="text-secondary flex items-center">
+        <i class="fa fa-lock mr-1"></i> 强制一行8个，超出横向滚动
+      </p>
+    </div>
+    
+    <!-- 滚动控制按钮 -->
+    <div class="mb-4 flex justify-end gap-2">
+      <button id="scrollLeft" class="px-3 py-1.5 bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-50 transition-colors flex items-center gap-1">
+        <i class="fa fa-chevron-left text-xs"></i> 左移
+      </button>
+      <button id="scrollRight" class="px-3 py-1.5 bg-primary text-white rounded-md shadow-sm hover:bg-primary/90 transition-colors flex items-center gap-1">
+        右移 <i class="fa fa-chevron-right text-xs"></i>
+      </button>
+    </div>
+    
+    <!-- 关键：Grid 滚动容器（严格一行8个） -->
+    <div id="gridContainer" class="grid-scroll-single-row scrollbar-thin p-3 bg-white rounded-xl shadow-sm mb-6">
+      <!-- Grid 项目（16个示例，确保超出8个） -->
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-cube text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 1</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-cubes text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 2</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-diamond text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 3</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-gem text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 4</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-star text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 5</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-heart text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 6</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-star-o text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 7</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-heart-o text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 8</span>
+      </div>
+      <!-- 以下是超出的项目，会触发滚动 -->
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-circle text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 9</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-square text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 10</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-triangle text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 11</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-circle-o text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 12</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-square-o text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 13</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-check text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 14</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-times text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 15</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-plus text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 16</span>
+      </div>
+      <div class="grid-item-fixed bg-light rounded-lg p-3 hover:bg-primary/5 transition-all duration-300 shadow-sm hover:shadow-md">
+        <i class="fa fa-minus text-primary text-2xl mb-2"></i>
+        <span class="text-sm font-medium">项目 17</span>
+      </div>
+    </div>
+    
+    <!-- 核心修改说明 -->
+    <div class="bg-white rounded-xl shadow-sm p-6">
+      <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+        <i class="fa fa-check-circle text-green-500"></i> 修复要点
+      </h3>
+      <ul class="space-y-2 text-secondary">
+        <li class="flex items-start gap-2">
+          <i class="fa fa-angle-right text-primary mt-1"></i>
+          <span>移除了响应式列数调整，强制保持 <code class="bg-gray-100 px-1 py-0.5 rounded text-xs">grid-template-columns: repeat(8, minmax(80px, 1fr))</code></span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fa fa-angle-right text-primary mt-1"></i>
+          <span>添加 <code class="bg-gray-100 px-1 py-0.5 rounded text-xs">grid-auto-flow: column</code> 确保项目横向排列，不换行</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fa fa-angle-right text-primary mt-1"></i>
+          <span>设置 <code class="bg-gray-100 px-1 py-0.5 rounded text-xs">overflow-y: hidden</code> 禁止纵向滚动，只允许横向滚动</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fa fa-angle-right text-primary mt-1"></i>
+          <span>项目最小宽度设为 80px，避免在小屏幕上挤压过窄</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <i class="fa fa-angle-right text-primary mt-1"></i>
+          <span>容器添加底部内边距，避免滚动条遮挡内容</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- JavaScript 滚动控制 -->
+  <script>
+    const gridContainer = document.getElementById('gridContainer');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    
+    // 计算每次滚动距离（单个项目宽度 + 间距）
+    const scrollStep = () => {
+      const firstItem = gridContainer.querySelector('.grid-item-fixed');
+      if (!firstItem) return 300;
+      // 项目宽度 + gap 间距
+      return firstItem.offsetWidth + parseInt(getComputedStyle(gridContainer).gap);
+    };
+    
+    // 左移滚动
+    scrollLeftBtn.addEventListener('click', () => {
+      gridContainer.scrollBy({ left: -scrollStep(), behavior: 'smooth' });
+    });
+    
+    // 右移滚动
+    scrollRightBtn.addEventListener('click', () => {
+      gridContainer.scrollBy({ left: scrollStep(), behavior: 'smooth' });
+    });
+    
+    // 滚动按钮状态控制
+    gridContainer.addEventListener('scroll', () => {
+      const { scrollLeft, scrollWidth, clientWidth } = gridContainer;
+      
+      // 到达最左侧
+      scrollLeftBtn.disabled = scrollLeft <= 10;
+      scrollLeftBtn.classList.toggle('opacity-50', scrollLeft <= 10);
+      scrollLeftBtn.classList.toggle('cursor-not-allowed', scrollLeft <= 10);
+      
+      // 到达最右侧
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+      scrollRightBtn.disabled = isAtEnd;
+      scrollRightBtn.classList.toggle('opacity-50', isAtEnd);
+      scrollRightBtn.classList.toggle('cursor-not-allowed', isAtEnd);
+    });
+    
+    // 初始化按钮状态
+    gridContainer.dispatchEvent(new Event('scroll'));
+    
+    // 触摸滑动支持
+    let startX = 0;
+    gridContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    
+    gridContainer.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = endX - startX;
+      
+      if (Math.abs(diffX) > 50) {
+        gridContainer.scrollBy({ 
+          left: diffX > 0 ? -scrollStep() : scrollStep(), 
+          behavior: 'smooth' 
+        });
+      }
+    });
+  </script>
+</body>
+</html>
