@@ -34,8 +34,21 @@ const Index = ({list}:Props)=> {
         gridAutoColumns:'12.5%',
         gridAutoFlow:'column',
         overflowX:'auto',
-        '@media (max-width: 999px)': {
-            gridAutoColumns: '20%', // 5个/行
+
+        '@container (width<1100px)': {
+            gridAutoColumns: '14.3%', // 5列
+        },
+        '@container (width<1000px)': {
+            gridAutoColumns: '16.66%', // 5列
+        },
+        '@container (width<900px)': {
+            gridAutoColumns: '20%', // 5列
+        },
+        '@container (width<800px)': {
+            gridAutoColumns: '25%', // 5列
+        },
+        '@container (width<700px)': {
+            gridAutoColumns: '33.3%', // 5列
         },
         // grid-auto-columns
      }}>

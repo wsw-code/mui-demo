@@ -18,7 +18,7 @@ const Index = () => {
             }}>
                 
             </Box>
-            <div className=" w-full max-w-[1200px] mx-auto ">
+            <div className=" w-full max-w-[1200px] mx-auto @container">
                     {/* 11sdsd */}
 
                 <SparkSwiper
