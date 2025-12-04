@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -21,6 +20,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Footer from '@/components/Footer';
 import { menuConfigList } from '@/config/menuConfig';
 import { useRouter, usePathname } from 'next/navigation';
+import Person from '@/components/Person';
 
 
 const MainColor = '#1a2c38';
@@ -132,6 +132,81 @@ const SparkTheme = createTheme({
       }
     },
 
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          borderColor: 'red',
+          color: 'red',
+
+        }
+      }
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+          '&.Mui-focused': {
+            color: '#fff', // 聚焦时紫色
+          },
+          '&.Mui-required': {
+            '& .MuiFormLabel-asterisk': {
+              color: 'red', // 星号颜色
+            },
+          }
+        }
+      }
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          color: '#fff',
+          borderColor: '#2e4453',
+
+          borderWidth: '2px',
+
+          '&:hover': {
+            borderColor: '#557086',
+          },
+          '&.Mui-focused': {
+            borderColor: '#557086',
+            // 注意：对于 OutlinedInput，需要定位到 fieldset
+            // '& .MuiOutlinedInput-notchedOutline': {
+            //   borderColor: '#557086',
+            // },
+          },
+
+          '& .MuiInputLabel-root:hover': {
+            borderColor: 'red',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderWidth: 0,
+          },
+
+          '&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+            borderWidth: 0,
+          },
+          '&.Mui-error': {
+            borderColor: 'red',
+            // 错误状态下的边框
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#ff6b6b', // 或者使用 theme.palette.error.main
+              borderWidth: 0,
+            },
+          }
+
+        }
+      }
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          paddingLeft: '0px',
+          marginLeft: '0px',
+          fontSize: '14px'
+        }
+      }
+    }
+
   }
 });
 
@@ -237,7 +312,12 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
   return (
     <ThemeProvider theme={SparkTheme}>
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -255,15 +335,22 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
           <Typography variant="h6" noWrap component="div">
             Stake
           </Typography>
+          <Person></Person>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader sx={{
-          backgroundColor: '#0f212e'
+          backgroundColor: '#0f212e',
+          display: 'flex',
+          justifyContent: 'space-between'
         }}>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <MenuIcon sx={{ color: '#fff' }} />
           </IconButton>
+
+
+
+
         </DrawerHeader>
         <Box className=' p-[16px]'>
           <Box component={'div'} sx={{
@@ -334,7 +421,6 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
               }
             </List>
 
-
             <List>
               <ListItem sx={{
                 '&:hover': {
@@ -344,8 +430,6 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
                 <Divider className=' w-full' />
               </ListItem>
             </List>
-
-
 
             <List >
               {['Test'].map((text, index) => (
