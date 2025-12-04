@@ -64,6 +64,13 @@ const SparkTheme = createTheme({
     fontWeightRegular:600
   },
   components:{
+    MuiButton:{
+      styleOverrides:{
+        root:{
+          color:'#ffffff',
+        }
+      }
+    },
     MuiDrawer:{
         styleOverrides:{
             paper:{
