@@ -19,8 +19,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Footer from '@/components/Footer';
-import {menuConfigList} from '@/config/menuConfig';
-import { useRouter,usePathname } from 'next/navigation';
+import { menuConfigList } from '@/config/menuConfig';
+import { useRouter, usePathname } from 'next/navigation';
 
 
 const MainColor = '#1a2c38';
@@ -37,8 +37,8 @@ const SparkTheme = createTheme({
 
     text: {
       primary: '#fff', // 主要文字白色
-    //   secondary: 'rgba(255, 255, 255, 0.7)', // 次要文字浅白色
-    //   disabled: 'rgba(255, 255, 255, 0.5)', // 禁用状态文字
+      //   secondary: 'rgba(255, 255, 255, 0.7)', // 次要文字浅白色
+      //   disabled: 'rgba(255, 255, 255, 0.5)', // 禁用状态文字
     },
     // 也可以修改其他颜色
     secondary: {
@@ -57,33 +57,35 @@ const SparkTheme = createTheme({
       main: '#4caf50',
     },
   },
-  typography:{
+  typography: {
     // button:{
     //   fontWeight:600
     // }
-    fontWeightRegular:600
+    fontWeightRegular: 600
   },
-  components:{
-    MuiButton:{
-      styleOverrides:{
-        root:{
-          color:'#ffffff',
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff',
+
         }
       }
     },
-    MuiDrawer:{
-        styleOverrides:{
-            paper:{
-                backgroundColor: DrawerColor, // 深色背景
-            }
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: DrawerColor, // 深色背景
         }
+      }
     },
-    MuiSvgIcon:{
-        styleOverrides:{
-            root:{
-                color: '#ffffff', // 图标白色
-            }
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          // color: '#ffffff', // 图标白色
+          // ':disabled': 'rgba(255, 255, 255, 0.5)'
         }
+      }
     },
     MuiListItemButton: {
       styleOverrides: {
@@ -96,7 +98,7 @@ const SparkTheme = createTheme({
           '&.Mui-selected': {
             backgroundColor: hoverColor, // 选中状态使用主色
           },
-          'padding':'8px 12px'
+          'padding': '8px 12px'
         },
       },
     },
@@ -105,31 +107,31 @@ const SparkTheme = createTheme({
         root: {
           '&:hover': {
             backgroundColor: hoverColor, // 使用主色
-            
+
           },
-        //   'paddingLeft':12,
-        //     'paddingRight':12,
+          //   'paddingLeft':12,
+          //     'paddingRight':12,
         },
       },
     },
-    MuiList:{
-        styleOverrides:{
-            root:{
-                paddingTop: 0,
-                paddingBottom: 0,
-            }
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+          paddingBottom: 0,
         }
+      }
     },
 
-    MuiDivider:{
-        styleOverrides:{
-            root:{
-                backgroundColor: '#2e4453', // 浅色分割线
-                height:2,
-            }
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#2e4453', // 浅色分割线
+          height: 2,
         }
+      }
     },
-    
+
   }
 });
 
@@ -157,14 +159,14 @@ const closedMixin = (theme: Theme): CSSObject => ({
 });
 
 const DrawerHeader = styled('div')(({ theme }) => {
-    return {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-    }
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  }
 });
 
 interface AppBarProps extends MuiAppBarProps {
@@ -219,7 +221,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const MiniDrawer:React.FC<React.PropsWithChildren> = (props)=> {
+const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
 
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -257,149 +259,152 @@ const MiniDrawer:React.FC<React.PropsWithChildren> = (props)=> {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader sx={{
-            backgroundColor:'#0f212e'
+          backgroundColor: '#0f212e'
         }}>
-            <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Box className=' p-[16px]'>
-        <Box component={'div'} sx={{
+          <Box component={'div'} sx={{
             borderRadius: '8px',
             // className=' bg-[#1a2c38] rounded-2xl overflow-hidden' 
-            
-            overflow:'hidden',
 
-            ...open?{background:'#1a2c38'}:{}
+            overflow: 'hidden',
 
-        }}  >
+            ...open ? { background: '#1a2c38' } : {}
+
+          }}  >
             <List  >
               {
-                menuConfigList.map((el,index)=>(
-                <ListItem key={el.path} disablePadding sx={{ display: 'block' }}>
-                <ListItemButton
-                    selected={pathname === el.path}
-                    onClick={()=>{
-                      router.push(el.path);
-                    }}
-                    sx={[
-                    {
-                        minHeight: 48,
-      
-                    },
-                    open
-                        ? {
-                            justifyContent: 'initial',
-                        }
-                        : {
-                            justifyContent: 'center',
-                        },
-                    ]}
-                >
-                    <ListItemIcon
-                    sx={[
+                menuConfigList.map((el, index) => (
+                  <ListItem key={el.path} disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                      selected={pathname === el.path}
+                      onClick={() => {
+                        router.push(el.path);
+                      }}
+                      sx={[
                         {
-                        minWidth: 0,
-                        justifyContent: 'center',
+                          minHeight: 48,
+
                         },
                         open
-                        ? {
-                            mr: 3,
-                            }
-                        : {
-                            mr: 'auto',
-                            },
-                    ]}
+                          ? {
+                            justifyContent: 'initial',
+                          }
+                          : {
+                            justifyContent: 'center',
+                          },
+                      ]}
                     >
-                    {React.createElement(el.Icon)}
-                    </ListItemIcon>
-                    <ListItemText
-                    primary={el.label}
-                    sx={[
-                        open
-                        ? {
-                            opacity: 1,
+                      <ListItemIcon
+                        sx={[
+                          {
+                            minWidth: 0,
+                            justifyContent: 'center',
+                            color: '#fff'
+                          },
+                          open
+                            ? {
+                              mr: 3,
                             }
-                        : {
-                            opacity: 0,
+                            : {
+                              mr: 'auto',
                             },
-                    ]}
-                    />
-                </ListItemButton>
-                </ListItem>
+                        ]}
+                      >
+                        {React.createElement(el.Icon)}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={el.label}
+                        sx={[
+                          open
+                            ? {
+                              opacity: 1,
+                            }
+                            : {
+                              opacity: 0,
+                            },
+                        ]}
+                      />
+                    </ListItemButton>
+                  </ListItem>
                 ))
               }
             </List>
 
 
             <List>
-                <ListItem sx={{
-                    '&:hover':{
-                        backgroundColor: 'primary.main'
-                    }
-                }} >
-                    <Divider className=' w-full'  />
-                </ListItem>
+              <ListItem sx={{
+                '&:hover': {
+                  backgroundColor: 'primary.main'
+                }
+              }} >
+                <Divider className=' w-full' />
+              </ListItem>
             </List>
-            
-            
-            
+
+
+
             <List >
-            {['Test'].map((text, index) => (
+              {['Test'].map((text, index) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                <ListItemButton
-                    
+                  <ListItemButton
+
                     sx={[
-                    {
+                      {
                         minHeight: 48,
                         // px: 2.5,
-                    },
-                    open
+
+                      },
+                      open
                         ? {
-                            justifyContent: 'initial',
+                          justifyContent: 'initial',
                         }
                         : {
-                            justifyContent: 'center',
+                          justifyContent: 'center',
                         },
                     ]}
-                >
+                  >
                     <ListItemIcon
-                    sx={[
+                      sx={[
                         {
-                        minWidth: 0,
-                        justifyContent: 'center',
+                          minWidth: 0,
+                          justifyContent: 'center',
+                          color: '#fff'
                         },
                         open
-                        ? {
+                          ? {
                             mr: 3,
-                            }
-                        : {
+                          }
+                          : {
                             mr: 'auto',
-                            },
-                    ]}
+                          },
+                      ]}
                     >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
                     {
-                        open && (
-                                                <ListItemText
-                    primary={text}
-                    />
-                        )
+                      open && (
+                        <ListItemText
+                          primary={text}
+                        />
+                      )
                     }
 
-                </ListItemButton>
+                  </ListItemButton>
                 </ListItem>
-            ))}
+              ))}
             </List>
-        </Box>
+          </Box>
         </Box>
 
 
       </Drawer>
-      <Box component="main" sx={{display:'flex',flexDirection:'column', flexGrow: 1,height:'100%',paddingTop:'64px',backgroundColor:'#1a2c38' }} >   
-        <Box sx={{flexGrow:1}}>
-            {props.children}
+      <Box component="main" sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, height: '100%', paddingTop: '64px', backgroundColor: '#1a2c38' }} >
+        <Box sx={{ flexGrow: 1 }}>
+          {props.children}
         </Box>
         <Footer />
       </Box>

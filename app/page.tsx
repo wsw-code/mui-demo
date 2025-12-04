@@ -1,19 +1,6 @@
 
 
-import Box from '@mui/material/Box';
-import Layout from '@/components/Layout';
-import CssBaseline from '@mui/material/CssBaseline';
+import Home from '@/app/home/page'
 
 
-
-
-export default function MainLayout({children}: {children: React.ReactNode} ) {
-
-
-  return (
-
-    <Box sx={{ display: 'flex' }}>
-      HOME
-    </Box>
-  );
-}
+export default Home

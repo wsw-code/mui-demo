@@ -1,22 +1,22 @@
 'use client';
 
 
-import { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { GameItem } from '@/type';
 import { Box, Button, ButtonGroup } from '@mui/material';
-
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+
 
 
 export interface Props {
-    list: GameItem[]
+    title?: string;
+    icon?: React.ReactNode;
+    children: React.ReactNode
 }
 
 
-const Index = ({ list }: Props) => {
+const Index = ({ title, icon, children }: Props) => {
 
 
 
@@ -42,8 +42,20 @@ const Index = ({ list }: Props) => {
     }
 
 
+    useEffect(() => {
+        if (ref.current) {
+            firstRef(ref.current?.children[0])
+            lastRef(ref.current?.children[ref.current?.children?.length - 1])
+        }
+
+    }, [children])
+
+
+
     return (
-        <Box>
+        <Box sx={{
+            containerType: 'inline-size'
+        }}>
             <Box sx={{
                 display: 'flex',
                 color: '#fff',
@@ -51,9 +63,17 @@ const Index = ({ list }: Props) => {
                 justifyContent: 'space-between',
             }}>
                 <Box className=' flex items-center'>
-                    <VideogameAssetIcon />
-                    <span className=' ml-[10px] font-bold'>
-                        Recommended Games
+
+                    {
+                        icon && (
+                            <span className=' mr-[10px]'>
+                                {icon}
+                            </span>
+                        )
+                    }
+
+                    <span className=' font-bold'>
+                        {title}
                     </span>
                 </Box>
                 <ButtonGroup
@@ -103,47 +123,35 @@ const Index = ({ list }: Props) => {
                 ref={ref}
                 sx={{
                     display: 'grid',
-                    gridAutoColumns: '12.5%',
+                    gridAutoColumns: '12.5%', // 8列
                     gridAutoFlow: 'column',
                     overflowX: 'auto',
 
                     '@container (width<1100px)': {
-                        gridAutoColumns: '14.3%', // 5列
+                        gridAutoColumns: '14.3%', // 7列
                     },
                     '@container (width<1000px)': {
-                        gridAutoColumns: '16.66%', // 5列
+                        gridAutoColumns: '16.66%', // 6列
                     },
                     '@container (width<900px)': {
                         gridAutoColumns: '20%', // 5列
                     },
                     '@container (width<800px)': {
-                        gridAutoColumns: '25%', // 5列
+                        gridAutoColumns: '25%', // 4列
                     },
                     '@container (width<700px)': {
-                        gridAutoColumns: '33.3%', // 5列
+                        gridAutoColumns: '33.3%', // 3列
                     },
                     scrollSnapType: 'x mandatory',
                     scrollBehavior: 'smooth',
                     scrollbarWidth: 'none',
-
+                    '& > *': {
+                        scrollSnapAlign: 'start',
+                        padding: '0 4%',
+                    }
                     // grid-auto-columns
                 }}>
-                {
-                    list.map((el, index) => (
-                        <Box sx={{
-                            padding: '0 4%',
-                            borderRadius: '4px',
-                            overflow: 'hidden',
-                            scrollSnapAlign: 'start',
-
-                        }}
-                            ref={index === 0 ? firstRef : index === list.length - 1 ? lastRef : undefined}
-                            key={el.id}
-                        >
-                            <img className=' rounded-2xl' src={el.iconUrl} alt="" />
-                        </Box>
-                    ))
-                }
+                {children}
             </Box>
         </Box>
 
