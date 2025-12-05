@@ -12,9 +12,11 @@ const Index = async () => {
 
 
     try {
-        const res = await fetch(`https://mui-demo.602851406.workers.dev/api/list`, {
+        const res = await fetch(`/api/list`, {
+            method: 'get'
         });
         const { data = [] } = await res.json() as { data: GameItem[] }
+
 
         return (
             <Box sx={{ color: '#fff' }}>
@@ -70,7 +72,8 @@ const Index = async () => {
         )
 
     } catch (error) {
-        return <div>ERROR-错误页面-{JSON.stringify(error)}</div>
+        console.log(error)
+        return <div>ERROR-错误页面？？？-{JSON.stringify(error)}</div>
     }
 
 
