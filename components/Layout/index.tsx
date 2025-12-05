@@ -68,7 +68,9 @@ const SparkTheme = createTheme({
       styleOverrides: {
         root: {
           color: '#ffffff',
-
+        },
+        loadingIndicator: {
+          color: '#fff'
         }
       }
     },
@@ -205,7 +207,7 @@ const SparkTheme = createTheme({
           fontSize: '14px'
         }
       }
-    }
+    },
 
   }
 });
