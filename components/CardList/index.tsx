@@ -59,7 +59,7 @@ const Index = ({ title, icon, children }: Props) => {
             <Box sx={{
                 display: 'flex',
                 color: '#fff',
-                padding: "20px 0",
+                paddingTop: '20px',
                 justifyContent: 'space-between',
             }}>
                 <Box className=' flex items-center'>
@@ -126,7 +126,7 @@ const Index = ({ title, icon, children }: Props) => {
                     gridAutoColumns: '12.5%', // 8列
                     gridAutoFlow: 'column',
                     overflowX: 'auto',
-
+                    paddingTop: '20px',
                     '@container (width<1100px)': {
                         gridAutoColumns: '14.3%', // 7列
                     },

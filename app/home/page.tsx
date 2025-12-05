@@ -39,11 +39,14 @@ const Index = async () => {
                                 <Box sx={{
 
                                     borderRadius: '4px',
-                                    overflow: 'hidden',
+                                    // overflow: 'hidden',
                                 }}
                                     key={index}
+                                    className=" group cursor-pointer"
                                 >
-                                    <img className=' rounded-2xl' src={(el as any).iconUrl} alt="" />
+                                    <a href={`/game/${el.id}`}>
+                                        <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
+                                    </a>
                                 </Box>
                             ))
                         }
@@ -57,11 +60,15 @@ const Index = async () => {
                                 <Box sx={{
 
                                     borderRadius: '4px',
-                                    overflow: 'hidden',
+                                    // overflow: 'hidden',
                                 }}
                                     key={index}
+                                    className=" group cursor-pointer"
+
                                 >
-                                    <img className=' rounded-2xl' src={(el as any).iconUrl} alt="" />
+                                    <a href={`/game/${el.id}`}>
+                                        <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
+                                    </a>
                                 </Box>
                             ))
                         }

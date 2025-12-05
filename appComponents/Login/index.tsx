@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, IconButton, InputAdornment, Modal, TextField } from "@mui/material";
+import { Box, Button, IconButton, InputAdornment, Modal, Snackbar, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRequest } from 'ahooks'
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,17 +10,12 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Avatar } from '@mui/material';
 import useUserStore from '@/store/user'
 import SparkModal from '@/components/SparkModal'
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '100%',
-};
+import { getPath } from "@/utils";
+import { toast } from '@/lib/toast'
 
 
 const Index = () => {
-    const { user, setUser } = useUserStore();
+    const { setUser } = useUserStore();
     const [open, setOpen] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const { control, handleSubmit, formState: { errors }, reset } = useForm({
@@ -31,14 +26,14 @@ const Index = () => {
     });
 
     const { loading, run } = useRequest(async (props) => {
-        const res = await fetch('http://localhost:3000/api/register', {
+        const res = await fetch(getPath('/api/login'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // 重要：告诉服务器发送的是 JSON
             },
             body: JSON.stringify(props)
         })
-        const { code, data } = await res.json();
+        const { code, data, message } = await res.json();
         if (code === 0) {
             setOpen(false);
             setUser({
@@ -47,6 +42,10 @@ const Index = () => {
                 id: 'xxxx'
             })
             reset();
+        } else {
+
+            // console.log(message)
+            toast.error(message)
         }
 
     }, { manual: true })
@@ -56,52 +55,29 @@ const Index = () => {
     };
 
     return (
-        <Box>
-            {
-                user ? (
-                    <Box sx={{
-                        display: "flex",
-                        alignItems: 'center',
-                        gap: '10px'
-                    }}>
-                        <Avatar alt="用户头像" />
-                        {
-                            user.name
-                        }
-                    </Box>
+        <>
+            <Snackbar
+                open={open}
+                autoHideDuration={1000}
 
-                ) : (
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            gap: '20px'
-                        }}
-                    >
-                        <Button
-                            sx={{
-                                color: '#fff',
-                                backgroundColor: '#2f4553',
-                                fontWeight: 600,
-                            }}
-                        >登录</Button>
-                        <Button sx={{
-                            color: '#fff',
-                            backgroundColor: '#1475e1',
-                            fontWeight: 600
-                        }} onClick={() => {
-                            setOpen(true)
-                        }} >注册</Button>
-                    </Box>
-                )
-            }
+                message=""
 
+            />
+            <Button sx={{
+                color: '#fff',
+                backgroundColor: '#2f4553',
+                fontWeight: 600
+            }} onClick={() => {
+                setOpen(true)
+
+            }} >登陆</Button>
 
             <SparkModal
                 open={open}
                 onClose={() => {
                     setOpen(false);
                 }}
-                title="注册"
+                title="登陆"
                 wrapperSxProps={{
                     width: '100%',
                     maxWidth: '600px',
@@ -205,7 +181,7 @@ const Index = () => {
                     </Box>
                 </form>
             </SparkModal>
-        </Box>
+        </>
     )
 }
 

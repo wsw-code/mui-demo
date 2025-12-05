@@ -20,7 +20,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import Footer from '@/components/Footer';
 import { menuConfigList } from '@/config/menuConfig';
 import { useRouter, usePathname } from 'next/navigation';
-import Person from '@/components/Person';
+import Person from '@/appComponents/Person';
+import { useRequest } from 'ahooks';
+import { getPath } from '@/utils';
+import useUserStore from '@/store/user'
+import ToastContainer from '@/components/ToastContainer'
 
 
 const MainColor = '#1a2c38';
@@ -134,15 +138,6 @@ const SparkTheme = createTheme({
       }
     },
 
-    MuiInput: {
-      styleOverrides: {
-        root: {
-          borderColor: 'red',
-          color: 'red',
-
-        }
-      }
-    },
     MuiInputLabel: {
       styleOverrides: {
         root: {
@@ -298,12 +293,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
+const Index: React.FC<React.PropsWithChildren> = (props) => {
 
+  const { setUser } = useUserStore();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
+
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -311,6 +309,31 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const { loading, run } = useRequest(async (props) => {
+    const res = await fetch(getPath('/api/init'), {
+      method: 'POST',
+
+      body: JSON.stringify(props)
+    })
+    const { code, data } = await res.json();
+    if (code === 0) {
+      if (data) {
+        setUser({
+          name: 'wsw',
+          email: 'xxxxx',
+          id: 'xxxx'
+        })
+      } else {
+        setUser(null)
+      }
+    }
+
+  })
+
+
+
+
   return (
     <ThemeProvider theme={SparkTheme}>
       <AppBar position="fixed" open={open}>
@@ -437,7 +460,10 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
               {['Test'].map((text, index) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                   <ListItemButton
-
+                    selected={pathname === '/test'}
+                    onClick={() => {
+                      router.push('/test');
+                    }}
                     sx={[
                       {
                         minHeight: 48,
@@ -492,10 +518,12 @@ const MiniDrawer: React.FC<React.PropsWithChildren> = (props) => {
         <Box sx={{ flexGrow: 1 }}>
           {props.children}
         </Box>
+        <ToastContainer />
         <Footer />
       </Box>
     </ThemeProvider>
   );
 }
 
-export default MiniDrawer
+export default Index
+
