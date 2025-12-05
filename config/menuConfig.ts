@@ -7,13 +7,13 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
  */
 export const menuConfigList = [
     {
-        path:'/home',
-        Icon:HomeIcon,
-        label:'Home'
+        path: '/home',
+        Icon: HomeIcon,
+        label: '菜单1'
     },
     {
-        path:'/game',
-        Icon:SportsEsportsIcon,
-        label:'Game'
+        path: '/game',
+        Icon: SportsEsportsIcon,
+        label: '菜单2'
     }
 ]

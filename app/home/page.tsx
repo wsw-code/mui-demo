@@ -30,7 +30,7 @@ const Index = async () => {
                 </Box>
                 <div className=" w-full max-w-[1200px] mx-auto pb-[20px]">
 
-                    <CardList title="Recommended Games" icon={<VideogameAssetIcon />}
+                    <CardList title="推荐游戏" icon={<VideogameAssetIcon />}
                     >
                         {
                             data.map((el, index) => (
@@ -48,7 +48,7 @@ const Index = async () => {
                     </CardList>
 
 
-                    <CardList title="Hot Games" icon={<VideogameAssetIcon />}>
+                    <CardList title="热门游戏" icon={<VideogameAssetIcon />}>
 
                         {
                             data.map((el, index) => (
