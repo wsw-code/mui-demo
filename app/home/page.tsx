@@ -11,7 +11,7 @@ const Index = async () => {
     const cookieStore = await cookies();
 
     // console.log(cookieStore.get('auth_token'), 'token')
-
+    console.log(isDev, 'isDev====')
     try {
         const res = await fetch(`${isDev ? 'http://localhost:3000' : 'https://mui-demo.602851406.workers.dev'}/api/list`, {
         });
