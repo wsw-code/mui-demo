@@ -11,9 +11,12 @@ const Index = async () => {
     const cookieStore = await cookies();
 
 
+
+
     try {
-        const res = await fetch(`/api/list`, {
-            method: 'get'
+        const res = await fetch(`https://mui-demo.602851406.workers.dev/api/list`, {
+            method: 'get',
+
         });
         const { data = [] } = await res.json() as { data: GameItem[] }
 
@@ -73,7 +76,7 @@ const Index = async () => {
 
     } catch (error) {
         console.log(error)
-        return <div>ERROR-错误页面？？？-{JSON.stringify(error)}</div>
+        return <div>ERROR-错误页面??-{JSON.stringify(error)}</div>
     }
 
 
