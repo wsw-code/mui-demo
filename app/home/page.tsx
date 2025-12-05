@@ -3,6 +3,7 @@ import CardList from "@/components/CardList";
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import { GameItem } from "@/type";
 import { cookies } from "next/headers";
+import { isDev } from "@/utils";
 
 const Index = async () => {
 
@@ -12,7 +13,7 @@ const Index = async () => {
     // console.log(cookieStore.get('auth_token'), 'token')
 
     try {
-        const res = await fetch('http://localhost:3000/api/list', {
+        const res = await fetch(`${isDev ? 'http://localhost:3000' : 'https://mui-demo.602851406.workers.dev'}/api/list`, {
         });
         const { data = [] } = await res.json() as { data: GameItem[] }
 
