@@ -13,7 +13,7 @@ const Index = async () => {
     // console.log(cookieStore.get('auth_token'), 'token')
     console.log(isDev, 'isDev====')
     try {
-        const res = await fetch(`${isDev ? 'http://localhost:3000' : 'https://mui-demo.602851406.workers.dev'}/api/list`, {
+        const res = await fetch(`https://mui-demo.602851406.workers.dev/api/list`, {
         });
         const { data = [] } = await res.json() as { data: GameItem[] }
 
