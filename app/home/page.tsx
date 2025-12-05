@@ -71,7 +71,7 @@ const Index = async () => {
         )
 
     } catch (error) {
-        return <div>ERROR-错误页面</div>
+        return <div>ERROR-错误页面-{isDev}</div>
     }
 
 
