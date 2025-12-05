@@ -10,8 +10,7 @@ const Index = async () => {
 
     const cookieStore = await cookies();
 
-    // console.log(cookieStore.get('auth_token'), 'token')
-    console.log(isDev, 'isDev====')
+
     try {
         const res = await fetch(`https://mui-demo.602851406.workers.dev/api/list`, {
         });
@@ -71,7 +70,7 @@ const Index = async () => {
         )
 
     } catch (error) {
-        return <div>ERROR-错误页面-{isDev}</div>
+        return <div>ERROR-错误页面-{JSON.stringify(error)}</div>
     }
 
 
