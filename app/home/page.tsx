@@ -3,7 +3,7 @@ import CardList from "@/components/CardList";
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import { GameItem } from "@/type";
 import { cookies } from "next/headers";
-import { isDev } from "@/utils";
+import { getPath, isDev } from "@/utils";
 
 const Index = async () => {
 
@@ -11,12 +11,9 @@ const Index = async () => {
     const cookieStore = await cookies();
 
 
-
-
     try {
-        const res = await fetch(`https://mui-demo-theta.vercel.app/api/list`, {
-            method: 'get',
-
+        const res = await fetch(getPath('/api/list'), {
+            method: 'get'
         });
         const { data = [] } = await res.json() as { data: GameItem[] }
 
