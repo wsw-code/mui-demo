@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { gameList } from '@/mock/gameList'
 
 
 
-export async function GET(res: NextRequest) {
+export async function GET() {
     try {
         return NextResponse.json(
             { msg: "成功", code: 0, data: gameList },

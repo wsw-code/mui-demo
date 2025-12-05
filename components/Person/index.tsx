@@ -49,7 +49,7 @@ const Index = () => {
             reset();
         }
 
-    })
+    }, { manual: true })
 
     const onSubmit = async (data: any) => {
         run(data);

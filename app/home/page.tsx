@@ -9,7 +9,7 @@ const Index = async () => {
 
     const cookieStore = await cookies();
 
-    console.log(cookieStore.get('auth_token'), 'token')
+    // console.log(cookieStore.get('auth_token'), 'token')
 
     try {
         const res = await fetch('http://localhost:3000/api/list', {
