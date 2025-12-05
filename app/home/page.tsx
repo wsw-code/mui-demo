@@ -14,7 +14,7 @@ const Index = async () => {
 
 
     try {
-        const res = await fetch(`https://mui-demo.602851406.workers.dev/api/list`, {
+        const res = await fetch(`https://mui-demo-theta.vercel.app/api/list`, {
             method: 'get',
 
         });
