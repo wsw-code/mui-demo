@@ -203,7 +203,29 @@ const SparkTheme = createTheme({
         }
       }
     },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          // 未选中状态的默认样式
+          color: '#fff',
+          fontWeight: 'bold',
+          fontSize: '16px',
 
+          // 悬停
+          '&:hover': {
+            color: '#fff',
+          },
+
+          // 选中状态
+          '&.Mui-selected': {
+            color: '#fff',
+            background: '#2e4453',
+            borderRadius: '50vh'
+            // fontWeight: 600,
+          },
+        },
+      },
+    },
   }
 });
 

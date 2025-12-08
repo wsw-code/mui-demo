@@ -12,4 +12,5 @@ export type GameItem = {
      * 游戏ICON图
      */
     iconUrl: string;
+    tagList: string[]
 }
