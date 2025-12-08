@@ -42,7 +42,7 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 
                 <Box sx={{
-                    padding: '24px'
+                    borderRadius: '5px'
                 }}>
                     <Accordion
                         sx={{
