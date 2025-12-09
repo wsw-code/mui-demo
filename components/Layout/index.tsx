@@ -18,7 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Footer from '@/components/Footer';
-import { menuConfigList } from '@/config/menuConfig';
+import { menuConfig2, menuConfigList } from '@/config/menuConfig';
 import { useRouter, usePathname } from 'next/navigation';
 import Person from '@/appComponents/Person';
 import { useRequest } from 'ahooks';
@@ -28,6 +28,8 @@ import ToastContainer from '@/components/ToastContainer'
 import type { } from '@mui/lab/themeAugmentation';
 import SparkSiderBar from '@/components/SparkSiderBar';
 import SideMenu from '@/appComponents/SideMenu'
+import { Collapse } from '@mui/material';
+import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
 
 const MainColor = '#1a2c38';
 
@@ -350,6 +352,8 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
     setOpen(true);
   };
 
+  const [expand, setExpand] = React.useState(false);
+
 
 
   const handleDrawerClose = () => {
@@ -502,12 +506,13 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
             </List>
 
             <List >
-              {['Test'].map((text, index) => (
+              {['Test-Exp'].map((text, index) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                   <ListItemButton
-                    selected={pathname === '/test'}
+                    // selected={pathname === '/test'}
                     onClick={() => {
-                      router.push('/test');
+                      // router.push('/test');
+                      setExpand(pre => !pre)
                     }}
                     sx={[
                       {
@@ -548,11 +553,69 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                         !open && { opacity: 0 },
                       ]}
                     />
-
+                    {expand ? <ExpandLess /> : <ExpandMore />}
                   </ListItemButton>
+
                 </ListItem>
               ))}
             </List>
+
+            <Collapse in={expand} sx={{ paddingLeft: '20px' }} timeout="auto" unmountOnExit>
+              <List >
+                {menuConfig2.map((el, index) => (
+                  <ListItem key={el.path} disablePadding sx={{ display: 'block', borderLeft: '2px solid #2f4553' }}>
+                    <ListItemButton
+                      selected={pathname === el.path}
+                      onClick={() => {
+                        router.push(el.path);
+                        // setExpand(pre => !pre)
+                      }}
+                      sx={[
+                        {
+                          minHeight: 48,
+                          // px: 2.5,
+
+                        },
+                        open
+                          ? {
+                            justifyContent: 'initial',
+                          }
+                          : {
+                            justifyContent: 'center',
+                          },
+                      ]}
+                    >
+                      <ListItemIcon
+                        sx={[
+                          {
+                            minWidth: 0,
+                            justifyContent: 'center',
+                            color: '#fff'
+                          },
+                          open
+                            ? {
+                              mr: 3,
+                            }
+                            : {
+                              mr: 'auto',
+                            },
+                        ]}
+                      >
+                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={el.label}
+                        sx={[
+                          !open && { opacity: 0 },
+                        ]}
+                      />
+                      {/* {expand ? <ExpandLess /> : <ExpandMore />} */}
+                    </ListItemButton>
+
+                  </ListItem>
+                ))}
+              </List>
+            </Collapse>
           </Box>
         </Box>
 

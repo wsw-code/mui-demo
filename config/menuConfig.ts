@@ -17,3 +17,17 @@ export const menuConfigList = [
         label: '菜单22'
     }
 ]
+
+export const menuConfig2 = [
+    {
+        path: '/test',
+        Icon: HomeIcon,
+        label: 'Test'
+    },
+    {
+        path: '/test2',
+        Icon: SportsEsportsIcon,
+        label: 'Test2'
+    }
+]
+
