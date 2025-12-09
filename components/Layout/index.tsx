@@ -25,7 +25,7 @@ import { useRequest } from 'ahooks';
 import { getPath } from '@/utils';
 import useUserStore from '@/store/user'
 import ToastContainer from '@/components/ToastContainer'
-
+import type { } from '@mui/lab/themeAugmentation';
 
 const MainColor = '#1a2c38';
 
@@ -226,6 +226,17 @@ const SparkTheme = createTheme({
         },
       },
     },
+    MuiTabPanel: {
+      styleOverrides: {
+        root: {
+          paddingLeft: '0px',
+          paddingRight: '0px',
+
+        },
+
+      }
+    }
+
   }
 });
 

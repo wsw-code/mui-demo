@@ -32,78 +32,60 @@ const Index = ({ data }: { data: GameItem | null }) => {
 
 
     return (
-        <Accordion
-            sx={{
-                background: '#0f212e',
-                boxShadow: 'none'
-            }}
-            defaultExpanded
-        >
+        <TabContext value={value}>
+            <Box >
+                <Tabs
+                    onChange={handleChange}
+                    value={value}
+                    sx={{
+                        "& .MuiTabs-list": {
+                            "display": "inline-flex",
+                            "width": 'auto',
+                            "padding": "6px",
+                            "backgroundColor": "primary.main",
+                            "borderRadius": "50vh"
+                        },
+                        '& .MuiTabs-indicator': {
+                            display: 'none'
+                        },
+                    }}
+                    aria-label="lab API tabs example"
 
-            <AccordionDetails>
-
-
-
-
-                <TabContext value={value}>
-                    <Box >
-                        <Tabs
-                            onChange={handleChange}
-                            value={value}
-                            sx={{
-                                "& .MuiTabs-list": {
-                                    "display": "inline-flex",
-                                    "width": 'auto',
-                                    "padding": "6px",
-                                    "backgroundColor": "primary.main",
-                                    "borderRadius": "50vh"
-                                },
-                                '& .MuiTabs-indicator': {
-                                    display: 'none'
-                                },
-                            }}
-                            aria-label="lab API tabs example"
-
-                        >
-                            <Tab label="描述" value="1" />
-                            <Tab label="大赢家" value="2" />
-                            <Tab label="幸运赢家" value="3" />
-                        </Tabs>
+                >
+                    <Tab label="描述" value="1" />
+                    <Tab label="大赢家" value="2" />
+                    <Tab label="幸运赢家" value="3" />
+                </Tabs>
 
 
+            </Box>
+            <TabPanel keepMounted value="1">
+
+                <Box sx={{ display: 'flex', gap: '16px' }}>
+                    <img src={data?.iconUrl} alt="" className=" rounded-[6px]" />
+
+                    <Box sx={{ display: 'inline-flex', gap: '10px', alignItems: 'flex-start', flexWrap: 'wrap', alignContent: 'flex-start' }} >
+                        {
+                            data?.tagList?.map((el, index) => (
+                                <Box key={index} component={"span"} sx={{
+                                    backgroundColor: '#2e4453',
+                                    borderRadius: '50vh',
+                                    padding: '0 8px',
+                                    fontSize: '12px',
+                                    lineHeight: '24px',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                }}  >{el}</Box>
+                            ))
+                        }
                     </Box>
-                    <TabPanel keepMounted value="1">
-
-                        <Box sx={{ display: 'flex', gap: '16px' }}>
-                            <img src={data?.iconUrl} alt="" className=" rounded-[6px]" />
-
-                            <Box sx={{ display: 'inline-flex', gap: '10px', alignItems: 'flex-start', flexWrap: 'wrap', alignContent: 'flex-start' }} >
-                                {
-                                    data?.tagList?.map((el, index) => (
-                                        <Box key={index} component={"span"} sx={{
-                                            backgroundColor: '#2e4453',
-                                            borderRadius: '50vh',
-                                            padding: '0 8px',
-                                            fontSize: '12px',
-                                            lineHeight: '24px',
-                                            fontWeight: 'bold',
-                                            cursor: 'pointer',
-                                        }}  >{el}</Box>
-                                    ))
-                                }
-                            </Box>
-                        </Box>
+                </Box>
 
 
-                    </TabPanel>
-                    <TabPanel keepMounted value="2">Item Two</TabPanel>
-                    <TabPanel keepMounted value="3">Item Three</TabPanel>
-                </TabContext>
-
-
-
-            </AccordionDetails>
-        </Accordion>
+            </TabPanel>
+            <TabPanel keepMounted value="2">Item Two</TabPanel>
+            <TabPanel keepMounted value="3">Item Three</TabPanel>
+        </TabContext>
 
     )
 

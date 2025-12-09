@@ -46,26 +46,25 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
                 }}>
                     <Accordion
                         sx={{
-                            background: '#0f212e'
+                            background: '#0f212e',
+                            paddingLeft: '24px',
+                            paddingRight: '24px'
                         }}
                         defaultExpanded
                     >
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon sx={{ color: '#fff', marginTop: '24px', marginBottom: '24px' }} />}
+                            expandIcon={<ExpandMoreIcon sx={{ color: '#fff', marginTop: '24px', marginBottom: '24px', }} />}
                             aria-controls="panel1-content"
-                            id="panel1-header"
+                            sx={{
+                                "&.MuiAccordionSummary-root": {
+                                    padding: '0px'
+                                }
+                            }}
                         >
-                            <Typography component="span">{data?.name}</Typography>
+                            <Typography sx={{ padding: '0px' }} component="span">{data?.name}</Typography>
                         </AccordionSummary>
-                        <AccordionDetails>
-
-
-
-
+                        <AccordionDetails sx={{ paddingLeft: '0px', paddingRight: '0px' }}>
                             <GameTabs data={data} />
-
-
-                            {/* <img src={data?.iconUrl} alt="" className=" rounded-[6px]" /> */}
                         </AccordionDetails>
                     </Accordion>
 
