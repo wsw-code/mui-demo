@@ -33,10 +33,10 @@ export default function RootLayout({
       >
         <AppRouterCacheProvider>
 
-        <Box sx={{ display: 'flex',height:'100%' }}>
-          <CssBaseline  />
-          <Layout>{children}</Layout>
-        </Box>
+          <Box sx={{ display: 'flex', height: '100%' }}>
+            <CssBaseline />
+            <Layout>{children}</Layout>
+          </Box>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -14,6 +14,6 @@ export const menuConfigList = [
     {
         path: '/game',
         Icon: SportsEsportsIcon,
-        label: '菜单2'
+        label: '菜单22'
     }
 ]

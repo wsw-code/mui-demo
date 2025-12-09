@@ -26,6 +26,8 @@ import { getPath } from '@/utils';
 import useUserStore from '@/store/user'
 import ToastContainer from '@/components/ToastContainer'
 import type { } from '@mui/lab/themeAugmentation';
+import SparkSiderBar from '@/components/SparkSiderBar';
+import SideMenu from '@/appComponents/SideMenu'
 
 const MainColor = '#1a2c38';
 
@@ -235,12 +237,26 @@ const SparkTheme = createTheme({
         },
 
       }
+    },
+    // MuiTable: {
+    //   styleOverrides: {
+    //     root: {
+    //       // backgroundColor: "#0f212e"
+    //     }
+    //   }
+    // },
+    MuiTableContainer: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#0f212e"
+        }
+      }
     }
 
   }
 });
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -396,7 +412,7 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
           <Person></Person>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <SideMenu open={open} >
         <DrawerHeader sx={{
           backgroundColor: '#0f212e',
           display: 'flex',
@@ -432,7 +448,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                       sx={[
                         {
                           minHeight: 48,
-
                         },
                         open
                           ? {
@@ -464,13 +479,10 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                       <ListItemText
                         primary={el.label}
                         sx={[
-                          open
-                            ? {
-                              opacity: 1,
-                            }
-                            : {
-                              opacity: 0,
-                            },
+                          !open && { opacity: 0 },
+                          {
+                            whiteSpace: 'nowrap'
+                          }
                         ]}
                       />
                     </ListItemButton>
@@ -530,13 +542,12 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                     >
                       {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                     </ListItemIcon>
-                    {
-                      open && (
-                        <ListItemText
-                          primary={text}
-                        />
-                      )
-                    }
+                    <ListItemText
+                      primary={text}
+                      sx={[
+                        !open && { opacity: 0 },
+                      ]}
+                    />
 
                   </ListItemButton>
                 </ListItem>
@@ -546,8 +557,18 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
         </Box>
 
 
-      </Drawer>
-      <Box component="main" sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, height: '100%', paddingTop: '64px', backgroundColor: '#1a2c38' }} >
+      </SideMenu>
+      <Box component="main" sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1, height: '100%',
+        paddingTop: '64px',
+        backgroundColor: '#1a2c38',
+        overflowY: 'auto',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+      }} >
         <Box sx={{ flexGrow: 1 }}>
           {props.children}
         </Box>

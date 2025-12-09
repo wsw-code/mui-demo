@@ -1,17 +1,14 @@
 
 'use client';
 
-import { Accordion, AccordionDetails, AccordionSummary, Box, Tabs, Typography } from "@mui/material"
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { getPath } from "@/utils";
+import { Box, Tabs } from "@mui/material"
 import { GameItem } from "@/type";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-
+import Table from '@/components/Table'
 
 
 
@@ -79,12 +76,121 @@ const Index = ({ data }: { data: GameItem | null }) => {
                             ))
                         }
                     </Box>
+
                 </Box>
-
-
             </TabPanel>
-            <TabPanel keepMounted value="2">Item Two</TabPanel>
-            <TabPanel keepMounted value="3">Item Three</TabPanel>
+
+
+            <TabPanel keepMounted value="2">
+                <Table
+                    columns={[
+                        {
+                            title: '排名',
+                            dataIndex: 'rank'
+                        },
+                        {
+                            title: '玩家',
+                            dataIndex: 'player'
+                        },
+                        {
+                            title: '日期',
+                            dataIndex: 'date'
+                        },
+                        {
+                            title: '投注',
+                            dataIndex: 'touzhu'
+                        },
+                        {
+                            title: '乘数',
+                            dataIndex: 'muti'
+                        },
+                        {
+                            title: '支付额',
+                            dataIndex: 'pay'
+                        },
+                    ]}
+                    dataSource={[{
+                        rank: 1,
+                        player: '玩家1',
+                        date: "2025-12-09",
+                        touzhu: '$0.42',
+                        muti: '2500 X',
+                        pay: "$1000"
+                    },
+                    {
+                        rank: 2,
+                        player: '玩家2',
+                        date: "2025-12-09",
+                        touzhu: '$0.42',
+                        muti: '2500 X',
+                        pay: "$1000"
+                    },
+                    {
+                        rank: 3,
+                        player: '玩家3',
+                        date: "2025-12-09",
+                        touzhu: '$0.42',
+                        muti: '2500 X',
+                        pay: "$1000"
+                    }
+                    ]}
+                />
+            </TabPanel>
+            <TabPanel keepMounted value="3">
+                <Table
+                    columns={[
+                        {
+                            title: '排名',
+                            dataIndex: 'rank'
+                        },
+                        {
+                            title: '玩家',
+                            dataIndex: 'player'
+                        },
+                        {
+                            title: '日期',
+                            dataIndex: 'date'
+                        },
+                        {
+                            title: '投注',
+                            dataIndex: 'touzhu'
+                        },
+                        {
+                            title: '乘数',
+                            dataIndex: 'muti'
+                        },
+                        {
+                            title: '支付额',
+                            dataIndex: 'pay'
+                        },
+                    ]}
+                    dataSource={[{
+                        rank: 1,
+                        player: '玩家11',
+                        date: "2025-12-09",
+                        touzhu: '$0.421',
+                        muti: '2500 X',
+                        pay: "$1000"
+                    },
+                    {
+                        rank: 2,
+                        player: '玩家22',
+                        date: "2025-12-09",
+                        touzhu: '$0.32',
+                        muti: '2500 X',
+                        pay: "$1000"
+                    },
+                    {
+                        rank: 3,
+                        player: '玩家33',
+                        date: "2025-12-09",
+                        touzhu: '$0.332',
+                        muti: '2500 X',
+                        pay: "$1000"
+                    }
+                    ]}
+                />
+            </TabPanel>
         </TabContext>
 
     )

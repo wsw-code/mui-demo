@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Box, Button, ButtonGroup } from '@mui/material';
+import { Box, Button, ButtonGroup, SxProps } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -12,11 +12,12 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 export interface Props {
     title?: string;
     icon?: React.ReactNode;
-    children: React.ReactNode
+    children: React.ReactNode;
+    wrapperSxProps?: SxProps
 }
 
 
-const Index = ({ title, icon, children }: Props) => {
+const Index = ({ title, icon, children, wrapperSxProps = {} }: Props) => {
 
 
 
@@ -121,34 +122,22 @@ const Index = ({ title, icon, children }: Props) => {
             <Box
                 component="div"
                 ref={ref}
+
                 sx={{
                     display: 'grid',
-                    gridAutoColumns: '12.5%', // 8列
+
                     gridAutoFlow: 'column',
                     overflowX: 'auto',
                     paddingTop: '20px',
-                    '@container (width<1100px)': {
-                        gridAutoColumns: '14.3%', // 7列
-                    },
-                    '@container (width<1000px)': {
-                        gridAutoColumns: '16.66%', // 6列
-                    },
-                    '@container (width<900px)': {
-                        gridAutoColumns: '20%', // 5列
-                    },
-                    '@container (width<800px)': {
-                        gridAutoColumns: '25%', // 4列
-                    },
-                    '@container (width<700px)': {
-                        gridAutoColumns: '33.3%', // 3列
-                    },
+
                     scrollSnapType: 'x mandatory',
                     scrollBehavior: 'smooth',
                     scrollbarWidth: 'none',
                     '& > *': {
                         scrollSnapAlign: 'start',
                         padding: '0 4%',
-                    }
+                    },
+                    ...wrapperSxProps
                     // grid-auto-columns
                 }}>
                 {children}

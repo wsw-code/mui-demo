@@ -4,6 +4,8 @@ import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import { GameItem } from "@/type";
 import { cookies } from "next/headers";
 import { getPath, isDev } from "@/utils";
+import { activityList, activityProps, gameCardProps } from "@/contants";
+
 
 const Index = async () => {
 
@@ -32,7 +34,7 @@ const Index = async () => {
                 </Box>
                 <div className=" w-full max-w-[1200px] mx-auto pb-[20px]">
 
-                    <CardList title="推荐游戏" icon={<VideogameAssetIcon />}
+                    <CardList wrapperSxProps={gameCardProps} title="推荐游戏" icon={<VideogameAssetIcon />}
                     >
                         {
                             data.map((el, index) => (
@@ -53,7 +55,7 @@ const Index = async () => {
                     </CardList>
 
 
-                    <CardList title="热门游戏" icon={<VideogameAssetIcon />}>
+                    <CardList wrapperSxProps={gameCardProps} title="热门游戏" icon={<VideogameAssetIcon />}>
 
                         {
                             data.map((el, index) => (
@@ -69,6 +71,89 @@ const Index = async () => {
                                     <a href={`/game/${el.id}`}>
                                         <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
                                     </a>
+                                </Box>
+                            ))
+                        }
+
+                    </CardList>
+
+
+                    <CardList
+                        wrapperSxProps={{
+                            gridAutoColumns: '33.3%',
+                            '& > *': {
+                                scrollSnapAlign: 'start',
+                                padding: '0 1%',
+                            },
+                            ...activityProps
+                        }}
+                        title="促销活动"
+                        icon={<VideogameAssetIcon />}
+
+                    >
+
+                        {
+                            activityList.map((el, index) => (
+                                <Box sx={{
+
+                                    borderRadius: '4px',
+                                    // overflow: 'hidden',
+
+                                }}
+                                    key={index}
+                                    className=" group cursor-pointer"
+
+                                >
+
+                                    <Box
+                                        sx={{
+                                            display: 'grid',
+                                            justifyContent: 'space-between',
+                                            // grid-template-columns: calc(60% - 20px) 40%;
+                                            gridTemplateColumns: "calc(60% - 20px) 40%",
+                                            columnGap: "20px",
+                                            backgroundColor: '#213743',
+                                            borderRadius: '8px',
+                                            overflow: 'hidden'
+                                        }}
+                                        component="a"
+
+                                    >
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: "8px", padding: '16px' }}>
+                                            <Box component="span" sx={{
+                                                background: '#fff',
+                                                color: '#071824',
+                                                fontSize: '12px',
+                                                alignSelf: 'flex-start',
+                                                padding: "0 4px",
+                                                borderRadius: '6px',
+                                                fontWeight: 'bold'
+                                            }}>
+                                                {el.title}
+                                            </Box>
+                                            <Box sx={{
+                                                color: '#fff',
+                                                fontSize: '20px',
+                                                fontWeight: 'bold'
+                                            }}>
+                                                {el.title2}
+                                            </Box>
+                                            <Box sx={{
+                                                color: '#b1bad3',
+                                                fontSize: '14px',
+                                                fontWeight: 'bold'
+                                            }}>
+                                                {el.title3}
+                                            </Box>
+                                            <Box sx={{ fontWeight: "bold" }}> 阅读更多</Box>
+                                        </Box>
+
+                                        <Box>
+                                            <img className=" w-full" src={el.path} alt="" />
+                                        </Box>
+                                    </Box>
+
+
                                 </Box>
                             ))
                         }

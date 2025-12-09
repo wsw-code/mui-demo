@@ -1,13 +1,9 @@
 // app/api/auth/logout/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-
 
 // POST 请求方式
 export async function POST(request: NextRequest) {
     try {
-        // 读取并验证请求
-
 
         const response = NextResponse.json(
             { success: true, message: '已退出登录', code: 0 },
@@ -27,9 +23,6 @@ export async function POST(request: NextRequest) {
                 path: '/',
             })
         })
-
-        // 如果指定清除所有 cookie
-
 
         // 添加安全头
         response.headers.set('Clear-Site-Data', '"cookies"')

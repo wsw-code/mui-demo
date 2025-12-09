@@ -3,7 +3,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getPath } from "@/utils";
 import { GameItem } from "@/type";
 import GameTabs from '@/appComponents/GameTabs'
-
+import GameIframe from '@/components/GameIframe'
 
 const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
 
@@ -29,17 +29,8 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
                     gap: '30px'
                 }}
             >
-                <Box
-                    sx={{
-                        width: '100%',
-                        borderRadius: '20px',
-                        height: '675px',
-                        overflow: 'hidden'
-                    }}
-                >
-                    <iframe className=" w-full h-full" src="https://sdk-test.hfrong.cn/game/eliminateStars/index.html"></iframe>
-                </Box>
 
+                <GameIframe url="https://sdk-test.hfrong.cn/game/eliminateStars/index.html" />
 
                 <Box sx={{
                     borderRadius: '5px'
@@ -67,8 +58,6 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
                             <GameTabs data={data} />
                         </AccordionDetails>
                     </Accordion>
-
-
                 </Box>
             </Box>
         </Box>
