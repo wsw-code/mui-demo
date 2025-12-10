@@ -12,7 +12,11 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 type Props = {
     menuList: MenuItem[][],
     open: boolean;
-    pathname: string
+    pathname: string;
+    showText?: boolean;
+    onExpandChange?: () => void
+    expand?: string[];
+    setExpand?: (val: string[]) => void;
 }
 
 
@@ -34,12 +38,12 @@ function buildPathMap(items: MenuItem[], parentPath: string[] = []): Map<string,
 }
 
 
-const Index = ({ open, menuList, pathname }: Props) => {
+const Index = ({ open, menuList, pathname, showText = true, onExpandChange, expand, setExpand }: Props) => {
 
 
     const router = useRouter();
 
-    const [expand, setExpand] = useState<string[]>([]);
+
 
 
 
@@ -61,10 +65,7 @@ const Index = ({ open, menuList, pathname }: Props) => {
         <Box sx={{ padding: '16px', }}>
             <Box sx={{
                 borderRadius: '8px',
-                // className=' bg-[#1a2c38] rounded-2xl overflow-hidden' 
-
                 overflow: 'hidden',
-
                 ...open ? { background: '#1a2c38' } : {}
 
             }}  >
@@ -89,6 +90,8 @@ const Index = ({ open, menuList, pathname }: Props) => {
                                                                 const expandList = menuMap.get(el.menuKey);
 
                                                                 if (expandList) {
+                                                                    onExpandChange?.()
+
                                                                     if (expandList.length === expand.length) {
                                                                         setExpand([])
                                                                     } else {
@@ -107,10 +110,7 @@ const Index = ({ open, menuList, pathname }: Props) => {
                                                                 ? {
                                                                     justifyContent: 'initial',
                                                                 }
-                                                                : {
-                                                                    // justifyContent: 'center',
-                                                                },
-
+                                                                : {},
                                                         ]}
 
                                                     >
@@ -132,15 +132,21 @@ const Index = ({ open, menuList, pathname }: Props) => {
                                                         >
                                                             {React.createElement(el.Icon)}
                                                         </ListItemIcon>
-                                                        <ListItemText
-                                                            primary={el.label}
-                                                            sx={[
-                                                                !open && { opacity: 0 },
-                                                                {
-                                                                    whiteSpace: 'nowrap'
-                                                                }
-                                                            ]}
-                                                        />
+
+                                                        {
+                                                            showText && (
+                                                                <ListItemText
+                                                                    primary={el.label}
+                                                                    sx={[
+                                                                        !open && { opacity: 0 },
+                                                                        {
+                                                                            whiteSpace: 'nowrap'
+                                                                        }
+                                                                    ]}
+                                                                />
+                                                            )
+                                                        }
+
                                                         {
                                                             (el.children && open) && (
                                                                 expand.includes(el.menuKey) ? <ExpandLess /> : <ExpandMore />
@@ -209,12 +215,17 @@ const Index = ({ open, menuList, pathname }: Props) => {
                                                                             >
                                                                                 {cellIndex % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                                                                             </ListItemIcon>
-                                                                            <ListItemText
-                                                                                primary={cell.label}
-                                                                                sx={[
-                                                                                    !open && { opacity: 0 },
-                                                                                ]}
-                                                                            />
+                                                                            {
+                                                                                showText && (
+                                                                                    <ListItemText
+                                                                                        primary={cell.label}
+                                                                                        sx={[
+                                                                                            !open && { opacity: 0 },
+                                                                                        ]}
+                                                                                    />
+                                                                                )
+                                                                            }
+
                                                                             {/* {expand ? <ExpandLess /> : <ExpandMore />} */}
                                                                         </ListItemButton>
 

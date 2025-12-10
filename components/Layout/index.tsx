@@ -26,11 +26,11 @@ import { getPath } from '@/utils';
 import useUserStore from '@/store/user'
 import ToastContainer from '@/components/ToastContainer'
 import type { } from '@mui/lab/themeAugmentation';
-import SideMenu from '@/appComponents/SideMenu'
+import SparkSiderBar from '@/components/SparkSiderBar'
 import { Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
 import { useEffect } from 'react';
-import MenuList from '@/components/MenuList'
+
 
 const MainColor = '#1a2c38';
 
@@ -382,213 +382,27 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
           <Person></Person>
         </Toolbar>
       </AppBar>
-      <SideMenu open={open} >
-        <DrawerHeader sx={{
-          backgroundColor: '#0f212e',
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}>
-          <IconButton onClick={handleDrawerClose}>
-            <MenuIcon sx={{ color: '#fff' }} />
-          </IconButton>
+      <SparkSiderBar
+        menuList={menuList}
+        pathname={pathname}
+        open={open}
+        onExpandChange={() => {
+          setOpen(true)
+        }}
+        header={
+          <DrawerHeader sx={{
+            backgroundColor: '#0f212e',
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}>
+            <IconButton onClick={handleDrawerClose}>
+              <MenuIcon sx={{ color: '#fff' }} />
+            </IconButton>
+          </DrawerHeader>
+        }
+      >
 
-
-
-
-        </DrawerHeader>
-        {/* <Box sx={{ padding: '16px' }}>
-          <Box sx={{
-            borderRadius: '8px',
-            // className=' bg-[#1a2c38] rounded-2xl overflow-hidden' 
-
-            overflow: 'hidden',
-
-            ...open ? { background: '#1a2c38' } : {}
-
-          }}  >
-            <List  >
-              {
-                menuConfigList.map((el, index) => (
-                  <ListItem key={el.path} disablePadding sx={{ display: 'block' }}>
-                    <ListItemButton
-                      selected={pathname === el.path}
-                      onClick={() => {
-                        router.push(el.path);
-                      }}
-                      sx={[
-                        {
-                          minHeight: 48,
-                        },
-                        open
-                          ? {
-                            justifyContent: 'initial',
-                          }
-                          : {
-                            justifyContent: 'center',
-                          },
-                      ]}
-                    >
-                      <ListItemIcon
-                        sx={[
-                          {
-                            minWidth: 0,
-                            justifyContent: 'center',
-                            color: '#fff'
-                          },
-                          open
-                            ? {
-                              mr: 3,
-                            }
-                            : {
-                              mr: 'auto',
-                            },
-                        ]}
-                      >
-                        {React.createElement(el.Icon)}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={el.label}
-                        sx={[
-                          !open && { opacity: 0 },
-                          {
-                            whiteSpace: 'nowrap'
-                          }
-                        ]}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                ))
-              }
-              <ListItem sx={{
-                '&:hover': {
-                  backgroundColor: 'primary.main'
-                }
-              }} >
-                <Divider className=' w-full' />
-              </ListItem>
-            </List>
-
-
-
-            <List >
-              {['Test-Exp'].map((text, index) => (
-                <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                    // selected={pathname === '/test'}
-                    onClick={() => {
-                      // router.push('/test');
-                      setExpand()
-                    }}
-                    sx={[
-                      {
-                        minHeight: 48,
-                        // px: 2.5,
-
-                      },
-                      open
-                        ? {
-                          justifyContent: 'initial',
-                        }
-                        : {
-                          justifyContent: 'center',
-                        },
-                    ]}
-                  >
-                    <ListItemIcon
-                      sx={[
-                        {
-                          minWidth: 0,
-                          justifyContent: 'center',
-                          color: '#fff'
-                        },
-                        open
-                          ? {
-                            mr: 3,
-                          }
-                          : {
-                            mr: 'auto',
-                          },
-                      ]}
-                    >
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={text}
-                      sx={[
-                        !open && { opacity: 0 },
-                      ]}
-                    />
-                    {expand ? <ExpandLess /> : <ExpandMore />}
-                  </ListItemButton>
-
-                </ListItem>
-              ))}
-            </List>
-
-            <Collapse in={expand} sx={{ paddingLeft: '20px' }} timeout="auto" unmountOnExit>
-              <List >
-                {menuConfig2.map((el, index) => (
-                  <ListItem key={el.path} disablePadding sx={{ display: 'block', borderLeft: '2px solid #2f4553' }}>
-                    <ListItemButton
-                      selected={pathname === el.path}
-                      onClick={() => {
-                        router.push(el.path);
-                        // setExpand(pre => !pre)
-                      }}
-                      sx={[
-                        {
-                          minHeight: 48,
-                          // px: 2.5,
-
-                        },
-                        open
-                          ? {
-                            justifyContent: 'initial',
-                          }
-                          : {
-                            justifyContent: 'center',
-                          },
-                      ]}
-                    >
-                      <ListItemIcon
-                        sx={[
-                          {
-                            minWidth: 0,
-                            justifyContent: 'center',
-                            color: '#fff'
-                          },
-                          open
-                            ? {
-                              mr: 3,
-                            }
-                            : {
-                              mr: 'auto',
-                            },
-                        ]}
-                      >
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={el.label}
-                        sx={[
-                          !open && { opacity: 0 },
-                        ]}
-                      />
-        
-                    </ListItemButton>
-
-                  </ListItem>
-                ))}
-              </List>
-            </Collapse>
-          </Box>
-        </Box> */}
-
-
-        <MenuList open={open} menuList={menuList} pathname={pathname} />
-
-
-      </SideMenu>
+      </SparkSiderBar>
       <Box component="main" sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -606,7 +420,7 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
         <ToastContainer />
         <Footer />
       </Box>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }
 
