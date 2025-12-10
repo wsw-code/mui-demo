@@ -45,7 +45,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open, sx = 
                 {
                     width: open ? '260px' : "80px",
                     color: '#fff',
-                    backgroundColor: '#213743',
+                    backgroundColor: '#0f212e',
                     height: '100%',
                     overflowX: 'hidden',
                     ...sx as object,

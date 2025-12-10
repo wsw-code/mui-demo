@@ -14,3 +14,12 @@ export type GameItem = {
     iconUrl: string;
     tagList: string[]
 }
+
+
+export type MenuItem = {
+    path: string,
+    Icon: any,
+    label: string,
+    children?: MenuItem[],
+    menuKey: string
+}

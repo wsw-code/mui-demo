@@ -18,7 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import Footer from '@/components/Footer';
-import { menuConfig2, menuConfigList } from '@/config/menuConfig';
+import { menuConfig2, menuConfigList, menuList } from '@/config/menuConfig';
 import { useRouter, usePathname } from 'next/navigation';
 import Person from '@/appComponents/Person';
 import { useRequest } from 'ahooks';
@@ -26,10 +26,11 @@ import { getPath } from '@/utils';
 import useUserStore from '@/store/user'
 import ToastContainer from '@/components/ToastContainer'
 import type { } from '@mui/lab/themeAugmentation';
-import SparkSiderBar from '@/components/SparkSiderBar';
 import SideMenu from '@/appComponents/SideMenu'
 import { Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
+import { useEffect } from 'react';
+import MenuList from '@/components/MenuList'
 
 const MainColor = '#1a2c38';
 
@@ -260,26 +261,7 @@ const SparkTheme = createTheme({
 
 const drawerWidth = 260;
 
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: 'hidden',
-});
 
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create('width', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
 
 const DrawerHeader = styled('div')(({ theme }) => {
   return {
@@ -319,30 +301,7 @@ const AppBar = styled(MuiAppBar, {
   ],
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-  ({ theme }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-    boxSizing: 'border-box',
-    variants: [
-      {
-        props: ({ open }) => open,
-        style: {
-          ...openedMixin(theme),
-          '& .MuiDrawer-paper': openedMixin(theme),
-        },
-      },
-      {
-        props: ({ open }) => !open,
-        style: {
-          ...closedMixin(theme),
-          '& .MuiDrawer-paper': closedMixin(theme),
-        },
-      },
-    ],
-  }),
-);
+
 
 const Index: React.FC<React.PropsWithChildren> = (props) => {
 
@@ -352,7 +311,7 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
     setOpen(true);
   };
 
-  const [expand, setExpand] = React.useState(false);
+  const [expand, setExpand] = React.useState<string[]>([]);
 
 
 
@@ -383,6 +342,13 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
     }
 
   })
+
+
+  useEffect(() => {
+    if (!open) {
+      setExpand([])
+    }
+  }, [open])
 
 
 
@@ -430,8 +396,8 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
 
 
         </DrawerHeader>
-        <Box className=' p-[16px]'>
-          <Box component={'div'} sx={{
+        {/* <Box sx={{ padding: '16px' }}>
+          <Box sx={{
             borderRadius: '8px',
             // className=' bg-[#1a2c38] rounded-2xl overflow-hidden' 
 
@@ -493,9 +459,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                   </ListItem>
                 ))
               }
-            </List>
-
-            <List>
               <ListItem sx={{
                 '&:hover': {
                   backgroundColor: 'primary.main'
@@ -505,6 +468,8 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
               </ListItem>
             </List>
 
+
+
             <List >
               {['Test-Exp'].map((text, index) => (
                 <ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -512,7 +477,7 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                     // selected={pathname === '/test'}
                     onClick={() => {
                       // router.push('/test');
-                      setExpand(pre => !pre)
+                      setExpand()
                     }}
                     sx={[
                       {
@@ -609,7 +574,7 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
                           !open && { opacity: 0 },
                         ]}
                       />
-                      {/* {expand ? <ExpandLess /> : <ExpandMore />} */}
+        
                     </ListItemButton>
 
                   </ListItem>
@@ -617,7 +582,10 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
               </List>
             </Collapse>
           </Box>
-        </Box>
+        </Box> */}
+
+
+        <MenuList open={open} menuList={menuList} pathname={pathname} />
 
 
       </SideMenu>
