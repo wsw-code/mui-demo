@@ -3,22 +3,13 @@
 import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject, ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Footer from '@/components/Footer';
-import { menuConfig2, menuConfigList, menuList } from '@/config/menuConfig';
+import { menuList } from '@/config/menuConfig';
 import { useRouter, usePathname } from 'next/navigation';
 import Person from '@/appComponents/Person';
 import { useRequest } from 'ahooks';
@@ -27,10 +18,9 @@ import useUserStore from '@/store/user'
 import ToastContainer from '@/components/ToastContainer'
 import type { } from '@mui/lab/themeAugmentation';
 import SparkSiderBar from '@/components/SparkSiderBar'
-import { Collapse } from '@mui/material';
-import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material';
-import { useEffect } from 'react';
-
+import MenuList from '@/components/MenuList';
+import { Suspense } from "react";
+import Loading from '@/components/Loading'
 
 const MainColor = '#1a2c38';
 
@@ -345,11 +335,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
   })
 
 
-  useEffect(() => {
-    if (!open) {
-      setExpand([])
-    }
-  }, [open])
 
 
 
@@ -384,11 +369,7 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
         </Toolbar>
       </AppBar>
       <SparkSiderBar
-        menuList={menuList}
         open={open}
-        onExpandChange={() => {
-          setOpen(true)
-        }}
         header={
           <DrawerHeader sx={{
             backgroundColor: '#0f212e',
@@ -401,8 +382,14 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
           </DrawerHeader>
         }
       >
-
+        <MenuList expand={expand} setExpand={setExpand} open={open} menuList={menuList} onExpandChange={() => {
+          if (!open) {
+            setOpen(true)
+          }
+        }} />
       </SparkSiderBar>
+
+
       <Box component="main" sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -420,6 +407,11 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
         <ToastContainer />
         <Footer />
       </Box>
+
+
+
+
+
     </ThemeProvider >
   );
 }

@@ -2,15 +2,15 @@ import { Box } from "@mui/material";
 import CardList from "@/components/CardList";
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import { GameItem } from "@/type";
-import { cookies } from "next/headers";
-import { getPath, isDev } from "@/utils";
+
+import { getPath } from "@/utils";
 import { activityList, activityProps, gameCardProps } from "@/contants";
 
 
 const Index = async () => {
 
 
-    const cookieStore = await cookies();
+
 
 
     try {

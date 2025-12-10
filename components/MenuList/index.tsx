@@ -59,12 +59,9 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
         }
     }, [open])
 
-    useEffect(() => {
-        if (open) {
-            const expandList = menuMap.get(pathname) || []
-            setExpand?.(expandList)
-        }
-    }, [open, pathname, menuMap])
+
+
+
 
 
 
@@ -99,9 +96,10 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                                 if (expandList) {
                                                                     onExpandChange?.()
 
-                                                                    if (expandList.length === expand?.length) {
+                                                                    if (expandList.every(el => expand.includes(el))) {
                                                                         setExpand?.([])
                                                                     } else {
+
                                                                         setExpand?.(expandList)
                                                                     }
                                                                 }
@@ -180,7 +178,10 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                 {
                                                     el.children && (
                                                         <Collapse in={expand.includes(el.menuKey)} sx={{ paddingLeft: '20px' }} timeout="auto" unmountOnExit>
-                                                            <List >
+                                                            <List sx={{
+                                                                borderTopLeftRadius: '8px',
+                                                                overflow: 'hidden'
+                                                            }}>
                                                                 {el.children.map((cell, cellIndex) => (
                                                                     <ListItem key={cell.path} disablePadding sx={{ display: 'block', borderLeft: '2px solid #2f4553' }}>
                                                                         <ListItemButton

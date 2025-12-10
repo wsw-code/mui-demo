@@ -59,7 +59,7 @@ const Index = () => {
 
             }}>
                 {
-                    [1, 2, 3, 4, 5].map(el => (
+                    [1, 2, 3, 4, 5, 6].map(el => (
                         <AccordionList key={el} {...props} ></AccordionList>
                     ))
                 }

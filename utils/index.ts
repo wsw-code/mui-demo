@@ -6,3 +6,5 @@ export const getPath = (path: string) => {
     const preUrl = isDev ? 'http://localhost:3000' : 'https://mui-demo-theta.vercel.app'
     return `${preUrl}${path}`
 }
+
+export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

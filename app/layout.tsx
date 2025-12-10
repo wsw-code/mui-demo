@@ -5,6 +5,8 @@ import "./globals.css";
 import 'swiper/css';
 import { Box, CssBaseline } from "@mui/material";
 import Layout from "@/components/Layout";
+import { Suspense } from "react";
+import Loading from '@/components/Loading'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +37,10 @@ export default function RootLayout({
 
           <Box sx={{ display: 'flex', height: '100%' }}>
             <CssBaseline />
-            <Layout>{children}</Layout>
+            <Suspense fallback={<Loading />}>
+              <Layout>{children}</Layout>
+            </Suspense>
+
           </Box>
         </AppRouterCacheProvider>
       </body>

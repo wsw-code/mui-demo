@@ -7,10 +7,8 @@ import { useRouter, usePathname } from 'next/navigation';
 export type Props = {
     open?: boolean,
     sx?: SxProps,
-    onTransitionEnd?: () => void,
     header?: React.ReactNode,
-    menuList?: MenuItem[][],
-    onExpandChange?: () => void
+
 }
 
 
@@ -26,15 +24,12 @@ const animationProps: SxProps<Theme> = (theme) => ({
 })
 
 
-const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = false, menuList = [], sx = {}, header, onTransitionEnd, onExpandChange }) => {
-    const [expand, setExpand] = useState<string[]>([]);
-    const pathname = usePathname();
+const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = false, sx = {}, header }) => {
+
     return (
         <Box
             sx={{
-                '@media (max-width: 600px)': {
-                    display: 'none'
-                },
+                display: ['none', 'block']
             }}
         >
 
@@ -54,6 +49,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = fals
                     '@media (min-width: 1000px)': {
                         display: 'none'
                     },
+                    display: ['']
                 }}
 
             >
@@ -61,17 +57,10 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = fals
             </Box>
             <Box
                 component="aside"
-                onTransitionEnd={(e) => {
-                    // onTransitionEnd?.()
-                    if (e.propertyName === 'width') {
-                        console.log(3)
-                        onTransitionEnd?.();
-                    }
-
-                }}
                 sx={[
                     {
                         width: open ? '260px' : "80px",
+
                         color: '#fff',
                         backgroundColor: '#0f212e',
                         height: '100%',
@@ -104,11 +93,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = fals
                     {header}
 
                     <Box key={open ? 'open' : 'close'} sx={animationProps}>
-                        <MenuList expand={expand} setExpand={setExpand} open={open} menuList={menuList} onExpandChange={() => {
-                            if (!open) {
-                                onExpandChange?.()
-                            }
-                        }} />
+                        {children}
                     </Box>
                 </Box>
             </Box>

@@ -4,26 +4,23 @@ import { SxProps } from "@mui/material";
 
 export const gameCardProps: SxProps = {
     gridAutoColumns: '12.5%', // 8列
-    '@container (width<1100px)': {
+    '@container (width<1200px)': {
         gridAutoColumns: '14.3%', // 7列
     },
-    '@container (width<1000px)': {
+    '@container (width<1100px)': {
         gridAutoColumns: '16.66%', // 6列
     },
-    '@container (width<900px)': {
+    '@container (width<1000px)': {
         gridAutoColumns: '20%', // 5列
     },
-    '@container (width<800px)': {
-        gridAutoColumns: '25%', // 4列
-    },
-    '@container (width<700px)': {
+    '@container (width<600px)': {
         gridAutoColumns: '33.3%', // 3列
     },
 }
 
 
 export const activityProps: SxProps = {
-    gridAutoColumns: ['100%', "50%", "33.33%"],
+    gridAutoColumns: ['100%', "100%", "50%", '33.33%'],
 }
 
 
