@@ -37,9 +37,9 @@ export default function RootLayout({
 
           <Box sx={{ display: 'flex', height: '100%' }}>
             <CssBaseline />
-            <Suspense fallback={<Loading />}>
+         
               <Layout>{children}</Layout>
-            </Suspense>
+   
 
           </Box>
         </AppRouterCacheProvider>

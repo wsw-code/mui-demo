@@ -1,9 +1,18 @@
 
+
+"use client";
 import { Box } from "@mui/material"
+import { useLayoutEffect, useState } from "react";
+
 
 
 const Index = () => {
 
+    const [open,setOpen] = useState(false)
+
+    useLayoutEffect(()=>{
+    setOpen(true)
+    },[])
 
     return (
         <Box
@@ -13,7 +22,11 @@ const Index = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: '#1a2c38'
+                background: '#1a2c38',
+                position:open?'static':'fixed',
+                top:0,
+                left:0,
+                zIndex:9999
             }}
         >
             <img className=" w-[150px]" src="/loading.gif" alt="" />

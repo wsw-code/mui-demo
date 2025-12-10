@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 
 
-const Index = () => {
+const Index = async () => {
 
 
     return (
