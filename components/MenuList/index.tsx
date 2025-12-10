@@ -12,7 +12,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 type Props = {
     menuList: MenuItem[][],
     open: boolean;
-    pathname: string;
+
     showText?: boolean;
     onExpandChange?: () => void
     expand?: string[];
@@ -38,12 +38,12 @@ function buildPathMap(items: MenuItem[], parentPath: string[] = []): Map<string,
 }
 
 
-const Index = ({ open, menuList, pathname, showText = true, onExpandChange, expand, setExpand }: Props) => {
+const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], setExpand }: Props) => {
 
 
     const router = useRouter();
 
-
+    const pathname = usePathname();
 
 
 
@@ -55,9 +55,16 @@ const Index = ({ open, menuList, pathname, showText = true, onExpandChange, expa
 
     useEffect(() => {
         if (!open) {
-            setExpand([])
+            setExpand?.([])
         }
     }, [open])
+
+    useEffect(() => {
+        if (open) {
+            const expandList = menuMap.get(pathname) || []
+            setExpand?.(expandList)
+        }
+    }, [open, pathname, menuMap])
 
 
 
@@ -92,10 +99,10 @@ const Index = ({ open, menuList, pathname, showText = true, onExpandChange, expa
                                                                 if (expandList) {
                                                                     onExpandChange?.()
 
-                                                                    if (expandList.length === expand.length) {
-                                                                        setExpand([])
+                                                                    if (expandList.length === expand?.length) {
+                                                                        setExpand?.([])
                                                                     } else {
-                                                                        setExpand(expandList)
+                                                                        setExpand?.(expandList)
                                                                     }
                                                                 }
                                                             }
@@ -149,7 +156,7 @@ const Index = ({ open, menuList, pathname, showText = true, onExpandChange, expa
 
                                                         {
                                                             (el.children && open) && (
-                                                                expand.includes(el.menuKey) ? <ExpandLess /> : <ExpandMore />
+                                                                expand?.includes(el.menuKey) ? <ExpandLess /> : <ExpandMore />
                                                             )
                                                         }
                                                         {

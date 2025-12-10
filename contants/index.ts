@@ -23,13 +23,7 @@ export const gameCardProps: SxProps = {
 
 
 export const activityProps: SxProps = {
-    gridAutoColumns: '33.3%', // 8列
-    '@container (width<900px)': {
-        gridAutoColumns: '50%', // 7列
-    },
-    '@container (width<500px)': {
-        gridAutoColumns: '100%', // 7列
-    },
+    gridAutoColumns: ['100%', "50%", "33.33%"],
 }
 
 

@@ -95,6 +95,7 @@ const SparkTheme = createTheme({
         root: {
           // color: '#ffffff', // 图标白色
           // ':disabled': 'rgba(255, 255, 255, 0.5)'
+          cursor: 'pointer'
         }
       }
     },
@@ -384,7 +385,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
       </AppBar>
       <SparkSiderBar
         menuList={menuList}
-        pathname={pathname}
         open={open}
         onExpandChange={() => {
           setOpen(true)

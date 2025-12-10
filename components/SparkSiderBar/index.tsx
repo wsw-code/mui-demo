@@ -2,14 +2,13 @@ import { Box, SxProps, Theme, } from '@mui/material';
 import MenuList from '@/components/MenuList'
 import React, { useState } from 'react';
 import { MenuItem } from '@/type';
-
+import { useRouter, usePathname } from 'next/navigation';
 
 export type Props = {
     open?: boolean,
     sx?: SxProps,
     onTransitionEnd?: () => void,
     header?: React.ReactNode,
-    pathname: string;
     menuList?: MenuItem[][],
     onExpandChange?: () => void
 }
@@ -27,10 +26,17 @@ const animationProps: SxProps<Theme> = (theme) => ({
 })
 
 
-const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = false, menuList = [], sx = {}, header, pathname, onTransitionEnd, onExpandChange }) => {
+const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = false, menuList = [], sx = {}, header, onTransitionEnd, onExpandChange }) => {
     const [expand, setExpand] = useState<string[]>([]);
+    const pathname = usePathname();
     return (
-        <>
+        <Box
+            sx={{
+                '@media (max-width: 600px)': {
+                    display: 'none'
+                },
+            }}
+        >
 
             <Box
                 sx={{
@@ -97,21 +103,13 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = fals
                 >
                     {header}
 
-                    {
-                        open ? (
-                            <Box key="open" sx={animationProps}>
-                                <MenuList expand={expand} setExpand={setExpand} open={open} menuList={menuList} pathname={pathname} />
-                            </Box>
-                        ) : (
-                            <Box key="close" sx={animationProps}>
-                                <MenuList expand={expand} setExpand={setExpand} showText={false} onExpandChange={() => {
-                                    onExpandChange?.()
-                                }} open={open} menuList={menuList} pathname={pathname} />
-                            </Box>
-                            // null
-                        )
-                    }
-
+                    <Box key={open ? 'open' : 'close'} sx={animationProps}>
+                        <MenuList expand={expand} setExpand={setExpand} open={open} menuList={menuList} onExpandChange={() => {
+                            if (!open) {
+                                onExpandChange?.()
+                            }
+                        }} />
+                    </Box>
                 </Box>
             </Box>
 
@@ -127,7 +125,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = fals
             }}>
 
             </Box>
-        </>
+        </Box>
 
 
     )

@@ -32,7 +32,16 @@ const Index = async () => {
                 }}>
 
                 </Box>
-                <div className=" w-full max-w-[1200px] mx-auto pb-[20px]">
+                <Box
+                    sx={{
+                        width: '100%',
+                        maxWidth: '1200px',
+                        margin: '0 auto',
+                        paddingBottom: '20px',
+                        paddingLeft: '16px',
+                        paddingRight: '16px'
+                    }}
+                >
 
                     <CardList wrapperSxProps={gameCardProps} title="推荐游戏" icon={<VideogameAssetIcon />}
                     >
@@ -159,7 +168,7 @@ const Index = async () => {
                         }
 
                     </CardList>
-                </div>
+                </Box>
             </Box >
         )
 
