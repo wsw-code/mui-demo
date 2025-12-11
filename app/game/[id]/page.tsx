@@ -17,7 +17,6 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { data = null } = await res.json() as { data: GameItem }
 
 
-
     return (
         <Box sx={{ color: '#fff', padding: '30px', width: '100%' }}>
             <Box

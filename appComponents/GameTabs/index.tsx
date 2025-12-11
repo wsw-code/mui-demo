@@ -7,7 +7,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import { useRef, useState } from "react";
-
+import GameCard from '@/components/GameCard';
 import Table from '@/components/Table'
 
 
@@ -59,7 +59,7 @@ const Index = ({ data }: { data: GameItem | null }) => {
             <TabPanel keepMounted value="1">
 
                 <Box sx={{ display: 'flex', gap: '16px' }}>
-                    <img src={data?.iconUrl} alt="" className=" rounded-[6px]" />
+                    <GameCard src={data?.iconUrl} wrapperSx={{ width: '100%', maxWidth: '150px' }} />
 
                     <Box sx={{ display: 'inline-flex', gap: '10px', alignItems: 'flex-start', flexWrap: 'wrap', alignContent: 'flex-start' }} >
                         {

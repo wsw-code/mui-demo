@@ -7,6 +7,7 @@ import { getPath } from "@/utils";
 import { activityList, activityProps, gameCardProps } from "@/contants";
 import withPageAnimation from '@/components/WithPageAnimation'
 // app/components/LinkExample.jsx
+import GameCard from '@/components/GameCard'
 import Link from 'next/link'
 
 const Index = async () => {
@@ -58,7 +59,7 @@ const Index = async () => {
                                     className=" group cursor-pointer"
                                 >
                                     <Link href={`/game/${el.id}`}>
-                                        <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
+                                        <GameCard src={el.iconUrl} />
                                     </Link>
                                 </Box>
                             ))
@@ -80,7 +81,7 @@ const Index = async () => {
 
                                 >
                                     <Link href={`/game/${el.id}`}>
-                                        <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
+                                        <GameCard src={el.iconUrl} />
                                     </Link>
                                 </Box>
                             ))
