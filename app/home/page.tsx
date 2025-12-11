@@ -80,7 +80,7 @@ const Index = async () => {
                                     className=" group cursor-pointer"
 
                                 >
-                                    <Link href={`/gameDetail/${el.id}`}>
+                                    <Link href={`/game/${el.id}`}>
                                         <GameCard src={el.iconUrl} />
                                     </Link>
                                 </Box>

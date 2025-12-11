@@ -1,19 +1,10 @@
 // components/MuiModal/index.tsx
 'use client'
 
-import {
-    Modal, Box
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import {
-    Warning,
-    Error,
-    Info,
-    CheckCircle,
-    Close
-} from '@mui/icons-material'
 import { createPortal } from 'react-dom'
 import { ReactNode, useState, useEffect } from 'react'
+import SparkModal from '@/components/SparkModal'
+import Logo from '@/svg/logo'
 
 // 定义接口，完全模仿 Ant Design
 interface ModalConfig {
@@ -82,7 +73,6 @@ export function MuiModalRenderer() {
         modalManager.subscribe((newModals) => {
             setModals(newModals)
         })
-
     }, [])
 
     return (
@@ -106,159 +96,47 @@ function MuiModal({ id, config, onDestroy }: {
     onDestroy: () => void
 }) {
     const [open, setOpen] = useState(true)
-    const [loading, setLoading] = useState(false)
     const {
-        title,
         content,
-        okText = '确定',
-        cancelText = '取消',
-        onOk,
-        onCancel,
-        type = 'confirm',
-        icon,
-        width = 416,
-        centered = false,
-        maskClosable = false,
-        closable = true
     } = config
 
-    const handleClose = () => {
-        setOpen(false)
-        onCancel?.()
-        setTimeout(() => onDestroy(), 300) // 等待动画完成
-    }
 
-    const handleOk = async () => {
-        if (onOk) {
-            try {
-                setLoading(true)
-                await onOk()
-                setOpen(false)
-                setTimeout(() => onDestroy(), 300)
-            } catch (error) {
-                // 错误处理
-            } finally {
-                setLoading(false)
-            }
-        } else {
-            setOpen(false)
-            setTimeout(() => onDestroy(), 300)
-        }
-    }
 
     const modalContent = (
-        // <Dialog
-        //     open={open}
-        //     onClose={maskClosable ? handleClose : undefined}
-        //     maxWidth="xs"
-        //     fullWidth
-        //     sx={{
-        //         '& .MuiDialog-paper': {
-        //             width,
-        //             margin: centered ? 'auto' : undefined,
-        //             ...(centered && { alignSelf: 'center' })
-        //         }
-        //     }}
-        // >
-        //     <DialogTitle sx={{
-        //         display: 'flex',
-        //         alignItems: 'center',
-        //         gap: 1,
-        //         padding: '16px 24px',
-        //         borderBottom: '1px solid #f0f0f0'
-        //     }}>
-        //         {getIcon()}
-        //         <Typography variant="h6" component="span">
-        //             {title}
-        //         </Typography>
-        //         {closable && (
-        //             <IconButton
-        //                 aria-label="close"
-        //                 onClick={handleClose}
-        //                 sx={{
-        //                     marginLeft: 'auto',
-        //                     color: 'text.secondary'
-        //                 }}
-        //                 size="small"
-        //             >
-        //                 <Close fontSize="small" />
-        //             </IconButton>
-        //         )}
-        //     </DialogTitle>
 
-        //     <DialogContent sx={{ padding: '24px' }}>
-        //         <Typography component="div">
-        //             {content}
-        //         </Typography>
-        //     </DialogContent>
 
-        //     <DialogActions sx={{
-        //         padding: '8px 24px 16px',
-        //         borderTop: '1px solid #f0f0f0'
-        //     }}>
-        //         <Button
-        //             onClick={handleClose}
-        //             variant="outlined"
-        //             disabled={loading}
-        //         >
-        //             {cancelText}
-        //         </Button>
-        //         <Button
-        //             onClick={handleOk}
-        //             variant="contained"
-        //             color={getButtonColor()}
-        //             disabled={loading}
-        //             startIcon={loading ? <CircularProgress size={16} /> : null}
-        //         >
-        //             {okText}
-        //         </Button>
-        //     </DialogActions>
-        // </Dialog>
-
-        <Modal
+        <SparkModal
             open={open}
             onClose={() => {
-                // onClose?.();
+                setOpen(false);
+                setTimeout(() => {
+                    modalManager.destroy(id)
+                }, 1000)
+            }}
+            title={<Logo sx={{ width: '80px', height: '40px' }} />}
+            wrapperSxProps={{
+                width: '100%',
+                maxWidth: '630px',
+                maxHeight: '716px',
+                height: '100%',
+                '@keyframes fadeInUp': {
+                    '0%': {
+                        opacity: 0,
+                        transform: 'translateY(30px)',
+                    },
+                    '100%': {
+                        opacity: 1,
+                        transform: 'translateY(0)',
+                    }
+                },
+
+                // 应用动画
+                animation: 'fadeInUp 0.25s ease-out forwards',
             }}
 
         >
-            <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: '#0f212e',
-                borderRadius: '10px',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                // ...wrapperSxProps
-            }}>
-                <Box sx={{
-                    backgroundColor: '#1a2c38',
-                    height: '60px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: "0 30px",
-                    color: '#fff',
-                    // ...headerSxProps
-
-                }}>
-                    <Box>{title}</Box>
-                    <CloseIcon sx={{ cursor: 'pointer' }} onClick={() => {
-                        // onClose?.()
-                    }} />
-                </Box>
-                <Box sx={{
-                    flex: 1,
-                    padding: "20px 30px 40px 30px",
-                    // ...contentSxProps
-                }}>
-                    {content}
-                </Box>
-            </Box>
-        </Modal>
+            {content}
+        </SparkModal>
     )
 
     return createPortal(modalContent, document.body)
@@ -267,5 +145,8 @@ function MuiModal({ id, config, onDestroy }: {
 export const ModalApi = {
     show: (config: ModalConfig) => {
         return modalManager.open(config)
+    },
+    destory: (id: string) => {
+        modalManager.destroy(id)
     }
 }

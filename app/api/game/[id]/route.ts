@@ -12,7 +12,7 @@ export async function GET(
 ) {
     try {
         const { id } = await params;
-        await delay(300)
+        await delay(500)
 
         // 验证 ID
         if (!id) {

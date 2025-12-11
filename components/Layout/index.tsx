@@ -66,7 +66,9 @@ const SparkTheme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
+
         root: {
+          textTransform: 'none',
           color: '#ffffff',
         },
         loadingIndicator: {
@@ -93,6 +95,7 @@ const SparkTheme = createTheme({
     MuiListItemButton: {
       styleOverrides: {
         root: {
+          textTransform: 'none',
           '&:hover': {
             backgroundColor: hoverColor, // 浅色hover效果
             // 或者使用主题颜色
@@ -130,7 +133,7 @@ const SparkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: '#2e4453', // 浅色分割线
-          height: 2,
+          // height: 2,
         }
       }
     },
@@ -139,6 +142,8 @@ const SparkTheme = createTheme({
       styleOverrides: {
         root: {
           color: '#fff',
+          fontSize: '14px',
+          fontWeight: '500',
           '&.Mui-focused': {
             color: '#fff', // 聚焦时紫色
           },

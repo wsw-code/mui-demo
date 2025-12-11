@@ -6,7 +6,10 @@ import Link from "next/link";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import useUserStore from '@/store/user'
 import { useRouter, usePathname } from 'next/navigation';
-import { ModalApi } from '@/components/Modal'
+import { ModalApi } from '@/components/Modal';
+import LoginOrRegister from '@/appComponents/LoginOrRegister';
+import { modalManager } from '@/components/Modal';
+
 
 const Index = ({ data }: { data?: GameItem }) => {
     const { user, setUser } = useUserStore();
@@ -22,14 +25,17 @@ const Index = ({ data }: { data?: GameItem }) => {
                 }}
                 startIcon={<PlayCircleIcon />}
 
-                onClick={(e) => {
+                onClick={() => {
 
                     if (!user) {
-                        ModalApi.show({
-                            content: 1
+                        const id = ModalApi.show({
+                            content: <LoginOrRegister onClose={() => {
+                                modalManager.destroy(id);
+                            }} onOk={() => { router.push(`/game/${data?.id}`); }} />
                         })
+
                     } else {
-                        router.push(`/game/${data?.id}`)
+                        router.push(`/game/${data?.id}`);
                     }
                 }}
             >

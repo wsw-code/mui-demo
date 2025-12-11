@@ -2,7 +2,7 @@
 
 import { MenuItem } from "@/type"
 import { Box, Collapse, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useRouter, usePathname } from 'next/navigation';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -247,7 +247,7 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                     backgroundColor: 'primary.main'
                                                 }
                                             }} >
-                                                <Divider className=' w-full' />
+                                                <Divider sx={{ width: '100%', height: '2px' }} />
                                             </ListItem>
                                         )
                                     }

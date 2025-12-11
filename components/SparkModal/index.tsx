@@ -7,10 +7,11 @@ import CloseIcon from '@mui/icons-material/Close';
 
 
 
+
 export type ModalProps = {
     /** */
     open: boolean,
-    title?: string,
+    title?: string | React.ReactNode,
     onClose?: () => void,
     contentSxProps?: SxProps,
     headerSxProps?: SxProps,
@@ -29,13 +30,16 @@ const Index = ({ open, title, contentSxProps, headerSxProps, wrapperSxProps = {}
             onClose={() => {
                 onClose?.();
             }}
-
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
         >
             <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
+
+
+                // transform: 'translate(-50%, -50%)',
                 backgroundColor: '#0f212e',
                 borderRadius: '10px',
                 overflow: 'hidden',
@@ -61,7 +65,7 @@ const Index = ({ open, title, contentSxProps, headerSxProps, wrapperSxProps = {}
                 </Box>
                 <Box sx={{
                     flex: 1,
-                    padding: "20px 30px 40px 30px",
+                    padding: "20px 30px 16px 30px",
                     ...contentSxProps
                 }}>
                     {children}

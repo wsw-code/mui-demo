@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Menu, MenuItem } from "@mui/material";
+import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { Avatar } from '@mui/material';
 import useUserStore from '@/store/user'
 import Register from '@/appComponents/Register';
@@ -8,6 +8,8 @@ import Login from '@/appComponents/Login'
 import React from "react";
 import { getPath } from "@/utils";
 import { useRequest } from "ahooks";
+import { ModalApi, modalManager } from "@/components/Modal";
+import LoginOrRegister from "@/appComponents/LoginOrRegister";
 
 
 
@@ -101,8 +103,26 @@ const Index = () => {
                             gap: '20px'
                         }}
                     >
-                        <Login />
-                        <Register />
+                        <Button sx={{
+                            color: '#fff',
+                            backgroundColor: '#2f4553',
+                            fontWeight: 600
+                        }} onClick={() => {
+                            const id = ModalApi.show({
+                                content: <LoginOrRegister onClose={() => {
+                                    modalManager.destroy(id);
+                                }} />
+                            })
+
+                        }} >登陆</Button>
+                        <Button sx={{
+                            color: '#fff',
+                            backgroundColor: '#1475e1',
+                            fontWeight: 600
+                        }} onClick={() => {
+
+                        }} >注册</Button>
+                        {/* <Register /> */}
                     </Box>
                 )
             }
