@@ -1,6 +1,7 @@
 // app/api/game/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { gameList } from '@/mock/gameList'
+import { delay } from '@/utils';
 // 模拟数据库
 
 
@@ -11,6 +12,7 @@ export async function GET(
 ) {
     try {
         const { id } = await params;
+        await delay(300)
 
         // 验证 ID
         if (!id) {

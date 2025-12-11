@@ -5,7 +5,9 @@ import { GameItem } from "@/type";
 
 import { getPath } from "@/utils";
 import { activityList, activityProps, gameCardProps } from "@/contants";
-
+import withPageAnimation from '@/components/WithPageAnimation'
+// app/components/LinkExample.jsx
+import Link from 'next/link'
 
 const Index = async () => {
 
@@ -55,9 +57,9 @@ const Index = async () => {
                                     key={index}
                                     className=" group cursor-pointer"
                                 >
-                                    <a href={`/game/${el.id}`}>
+                                    <Link href={`/game/${el.id}`}>
                                         <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
-                                    </a>
+                                    </Link>
                                 </Box>
                             ))
                         }
@@ -77,9 +79,9 @@ const Index = async () => {
                                     className=" group cursor-pointer"
 
                                 >
-                                    <a href={`/game/${el.id}`}>
+                                    <Link href={`/game/${el.id}`}>
                                         <img className=' rounded-2xl transform transition-transform duration-200 group-hover:-translate-y-2' src={el.iconUrl} alt="" />
-                                    </a>
+                                    </Link>
                                 </Box>
                             ))
                         }
@@ -181,4 +183,4 @@ const Index = async () => {
 }
 
 
-export default Index
+export default withPageAnimation(Index)

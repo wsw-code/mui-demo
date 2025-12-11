@@ -4,6 +4,7 @@ import { getPath } from "@/utils";
 import { GameItem } from "@/type";
 import GameTabs from '@/appComponents/GameTabs'
 import GameIframe from '@/components/GameIframe'
+import withPageAnimation from "@/components/WithPageAnimation";
 
 const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
 
@@ -67,4 +68,4 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 
 
-export default Index
+export default withPageAnimation(Index)
