@@ -1,22 +1,14 @@
 'use client';
 
-import { Box, Button, Menu, MenuItem } from "@mui/material";
-
+import { Box, Menu, MenuItem } from "@mui/material";
 import { Avatar } from '@mui/material';
 import useUserStore from '@/store/user'
 import Register from '@/appComponents/Register';
 import Login from '@/appComponents/Login'
-import { useState } from "react";
 import React from "react";
 import { getPath } from "@/utils";
 import { useRequest } from "ahooks";
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '100%',
-};
+
 
 
 const Index = () => {

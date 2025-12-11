@@ -3,11 +3,9 @@
 import { Box, Button, IconButton, InputAdornment, Modal, Snackbar, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRequest } from 'ahooks'
-import CloseIcon from '@mui/icons-material/Close';
 import { useForm, Controller } from 'react-hook-form';
 import { InputLabel } from '@mui/material';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Avatar } from '@mui/material';
 import useUserStore from '@/store/user'
 import SparkModal from '@/components/SparkModal'
 import { getPath } from "@/utils";
@@ -56,13 +54,6 @@ const Index = () => {
 
     return (
         <>
-            <Snackbar
-                open={open}
-                autoHideDuration={1000}
-
-                message=""
-
-            />
             <Button sx={{
                 color: '#fff',
                 backgroundColor: '#2f4553',
