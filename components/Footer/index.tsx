@@ -43,7 +43,7 @@ const Index = () => {
 
 
     return (
-        <Box sx={{ color: '#fff', backgroundColor: '#091d2a', display: 'flex', justifyContent: 'center', padding: '16px' }}>
+        <Box sx={{ color: '#fff', backgroundColor: '#091d2a', display: 'flex', justifyContent: 'center', padding: '16px', paddingTop: '32px' }}>
             <Box sx={{
                 display: "grid",
                 alignItems: 'center',

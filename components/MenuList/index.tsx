@@ -60,11 +60,6 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
     }, [open])
 
 
-
-
-
-
-
     return (
         <Box sx={{ padding: '16px', }}>
             <Box sx={{
@@ -84,12 +79,10 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                 <ListItem key={el.path} disablePadding sx={{ display: 'block' }}>
                                                     <ListItemButton
                                                         selected={pathname === el.path}
-
                                                         onClick={() => {
                                                             if (el.path) {
                                                                 router.push(el.path);
                                                             }
-                                                            // debugger
                                                             if (el.children) {
                                                                 const expandList = menuMap.get(el.menuKey);
 
@@ -261,22 +254,10 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
 
                                 </React.Fragment>
                             )
-
-
-
                         })
 
-
-
-
                     }
-
                 </List>
-
-
-
-
-
             </Box>
         </Box>
     )

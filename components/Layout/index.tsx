@@ -388,8 +388,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
           }
         }} />
       </SparkSiderBar>
-
-
       <Box component="main" sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -401,17 +399,16 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
           display: 'none',
         },
       }} >
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={[
+          { flexGrow: 1 }
+        ]}>
+
           {props.children}
+
         </Box>
         <ToastContainer />
         <Footer />
       </Box>
-
-
-
-
-
     </ThemeProvider >
   );
 }
