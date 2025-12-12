@@ -2,9 +2,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getPath } from "@/utils";
 import { GameItem } from "@/type";
+import useUserStore from '@/store/user'
 import GameTabs from '@/appComponents/GameTabs'
 import GameIframe from '@/components/GameIframe'
 import withPageAnimation from "@/components/WithPageAnimation";
+import { cookies } from "next/headers";
+
 
 const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
 
@@ -14,8 +17,12 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
     const res = await fetch(getPath(`/api/game/${id}`), {
         method: 'get'
     });
-    const { data = null } = await res.json() as { data: GameItem }
+    const { data } = await res.json() as { data: GameItem };
 
+    const cookieStore = await cookies();
+
+    const token = cookieStore.get('auth_token');
+    console.log('token', token?.value)
 
     return (
         <Box sx={{ color: '#fff', padding: '30px', width: '100%' }}>
@@ -30,7 +37,7 @@ const Index = async ({ params }: { params: Promise<{ id: string }> }) => {
                 }}
             >
 
-                <GameIframe url="https://sdk-test.hfrong.cn/game/eliminateStars/index.html" />
+                <GameIframe token={token?.value} url="https://sdk-test.hfrong.cn/game/eliminateStars/index.html" />
 
                 <Box sx={{
                     borderRadius: '5px'

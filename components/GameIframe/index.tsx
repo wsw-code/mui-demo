@@ -3,16 +3,18 @@ import { Box } from "@mui/material"
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { useEffect, useRef, useState } from "react";
 import useUserStore from '@/store/user';
-import TryPlay from '@/appComponents/TryPlay'
+import { ModalApi, modalManager } from "@/components/Modal";
+import LoginOrRegister from "@/appComponents/LoginOrRegister";
 
 
 export interface Props {
-    url: string
+    url: string,
+    token?: string
 }
 
 const showDelay = 800;
 
-const Index = ({ url }: Props) => {
+const Index = ({ url, token }: Props) => {
 
 
     const { user, setUser } = useUserStore();
@@ -25,6 +27,19 @@ const Index = ({ url }: Props) => {
     useEffect(() => {
         StartTime.current = Date.now();
     }, [])
+
+    useEffect(() => {
+        if (!token) {
+            const id = ModalApi.show({
+                content: <LoginOrRegister onClose={() => {
+                    modalManager.destroy(id);
+                }} onOk={() => {
+
+
+                }} />
+            })
+        }
+    }, [token])
 
     return (
         user ? (
@@ -49,9 +64,7 @@ const Index = ({ url }: Props) => {
 
                             onLoad={() => {
                                 console.log(StartTime.current);
-                                console.log(Date.now())
                                 const gap = Date.now() - StartTime.current;
-                                console.log(gap)
                                 if (gap >= showDelay) {
                                     setShow(true)
                                 } else {
@@ -123,7 +136,7 @@ const Index = ({ url }: Props) => {
                     }} />
                 </Box>
             </Box>
-        ) : <TryPlay />
+        ) : null
 
     )
 }

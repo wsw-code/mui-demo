@@ -13,6 +13,7 @@ export type Props = {
 
     onClose?: () => void;
     onOk?: () => void;
+    type?: "login" | "register"
 }
 
 
@@ -24,9 +25,9 @@ const CusTabPanel = styled(TabPanel)(({ theme }) => {
     }
 });
 
-const Index = ({ onClose, onOk }: Props) => {
+const Index = ({ onClose, onOk, type = "login" }: Props) => {
 
-    const [status, setStatus] = useState<"login" | "register">("login")
+    const [status, setStatus] = useState<"login" | "register">(type)
 
 
 
@@ -37,11 +38,6 @@ const Index = ({ onClose, onOk }: Props) => {
     return (
 
         <Box sx={{ height: '100%' }}>
-            {/* {
-                status === "login" ? (
-                    <Login setStatus={toggle} onClose={onClose} onOk={onOk} />
-                ) : <Register setStatus={toggle} onClose={onClose} onOk={onOk} />
-            } */}
 
             <TabContext value={status}>
                 <CusTabPanel keepMounted value={"login"}>

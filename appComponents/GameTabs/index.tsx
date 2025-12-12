@@ -6,7 +6,7 @@ import { GameItem } from "@/type";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
-import { useRef, useState } from "react";
+import { useState } from "react";
 import GameCard from '@/components/GameCard';
 import Table from '@/components/Table'
 
@@ -14,7 +14,8 @@ import Table from '@/components/Table'
 
 
 
-const Index = ({ data }: { data: GameItem | null }) => {
+
+const Index = ({ data }: { data?: GameItem }) => {
 
 
     const [value, setValue] = useState('1');
@@ -22,11 +23,6 @@ const Index = ({ data }: { data: GameItem | null }) => {
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
-
-
-
-
-
 
     return (
         <TabContext value={value}>
@@ -59,8 +55,7 @@ const Index = ({ data }: { data: GameItem | null }) => {
             <TabPanel keepMounted value="1">
 
                 <Box sx={{ display: 'flex', gap: '16px' }}>
-                    <GameCard src={data?.iconUrl} wrapperSx={{ width: '100%', maxWidth: '150px' }} />
-
+                    <GameCard src={data?.iconUrl} wrapperSx={{ width: '100%', maxWidth: '150px', minWidth: '100px', alignSelf: 'flex-start' }} />
                     <Box sx={{ display: 'inline-flex', gap: '10px', alignItems: 'flex-start', flexWrap: 'wrap', alignContent: 'flex-start' }} >
                         {
                             data?.tagList?.map((el, index) => (
@@ -76,7 +71,6 @@ const Index = ({ data }: { data: GameItem | null }) => {
                             ))
                         }
                     </Box>
-
                 </Box>
             </TabPanel>
 

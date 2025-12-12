@@ -6,7 +6,7 @@ import { ReactNode, useState, useEffect } from 'react'
 import SparkModal from '@/components/SparkModal'
 import Logo from '@/svg/logo'
 
-// 定义接口，完全模仿 Ant Design
+
 interface ModalConfig {
     title?: ReactNode
     content: ReactNode
@@ -14,15 +14,13 @@ interface ModalConfig {
     cancelText?: string
     onOk?: () => void | Promise<void>
     onCancel?: () => void
-    type?: 'info' | 'success' | 'error' | 'warning' | 'confirm'
-    icon?: ReactNode
     width?: number
     centered?: boolean
     maskClosable?: boolean
     closable?: boolean
 }
 
-// 全局管理器
+/**全局管理器 */
 class ModalManager {
     private modals: Array<{ id: string; config: ModalConfig }> = []
     private listeners: Set<(modals: any[]) => void> = new Set()
@@ -117,7 +115,7 @@ function MuiModal({ id, config, onDestroy }: {
             wrapperSxProps={{
                 width: '100%',
                 maxWidth: '630px',
-                maxHeight: '716px',
+                maxHeight: ["100%", '716px'],
                 height: '100%',
                 '@keyframes fadeInUp': {
                     '0%': {

@@ -12,7 +12,7 @@ import { modalManager } from '@/components/Modal';
 
 
 const Index = ({ data }: { data?: GameItem }) => {
-    const { user, setUser } = useUserStore();
+    const { user } = useUserStore();
     const router = useRouter();
 
     return (
@@ -31,7 +31,10 @@ const Index = ({ data }: { data?: GameItem }) => {
                         const id = ModalApi.show({
                             content: <LoginOrRegister onClose={() => {
                                 modalManager.destroy(id);
-                            }} onOk={() => { router.push(`/game/${data?.id}`); }} />
+                            }} onOk={() => {
+                                console.log(1)
+                                router.push(`/game/${data?.id}`);
+                            }} />
                         })
 
                     } else {

@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, BoxProps, Button, Checkbox, FormControlLabel, FormHelperText, IconButton, InputAdornment, MenuItem, Modal, Select, styled, Tab, Tabs, TextField } from "@mui/material";
-import { useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { useRequest } from 'ahooks'
 import { useForm, Controller } from 'react-hook-form';
 import { InputLabel } from '@mui/material';
@@ -393,7 +393,7 @@ const Second = ({ onClose, onOk, setStatus, onSubmit }: Props & { onSubmit: (val
 }
 
 
-const Third = () => {
+const Third: React.FC<PropsWithChildren<{ onOk?: () => void }>> = ({ onOk, children }) => {
     const { control, handleSubmit, formState: { errors }, reset } = useForm({
         defaultValues: {
             agree: false,
@@ -402,9 +402,8 @@ const Third = () => {
     });
 
 
-    const next = (data: any) => {
-        // onSubmit(data);
-        console.log(data)
+    const next = () => {
+        onOk?.()
 
     };
 
@@ -486,7 +485,7 @@ const Third = () => {
                                             {...field}
                                             value={field.value || false}
                                             onChange={(e) => {
-                                                field.onChange(e.target.value)
+                                                field.onChange(e.target.checked)
                                             }}
                                         />
                                     }
@@ -522,13 +521,8 @@ const Third = () => {
 
 
 
-                    <Button type="submit" sx={{
-                        height: '52px',
-                        color: '#fff',
-                        backgroundColor: '#1475e1',
-                        fontSize: '18px',
-                        borderRadius: '8px'
-                    }}>创建用户</Button>
+
+                    {children}
                 </Box>
             </form>
 
@@ -545,29 +539,28 @@ const Index = (props: Props) => {
 
     const [step, setStep] = useState(0)
     const [lang, setLang] = useState("zh");
-    const [submitData, setSubmitData] = useState({})
+    const [submitData, setSubmitData] = useState<any>({})
 
     const { setUser } = useUserStore();
 
     const onSubmit = (data: any) => {
         setSubmitData(data);
-
-        console.log(data);
         setStep(pre => ++pre)
     }
 
 
-    const { loading, run } = useRequest(async (props) => {
+    const { loading, run } = useRequest(async (submitData) => {
         const res = await fetch(getPath('/api/register'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // 重要：告诉服务器发送的是 JSON
             },
-            body: JSON.stringify(props)
+            body: JSON.stringify(submitData)
         })
         const { code, data } = await res.json();
         if (code === 0) {
             props?.onOk?.();
+            props?.onClose?.();
             setUser({
                 name: data.username,
                 email: 'xxxxx',
@@ -622,7 +615,22 @@ const Index = (props: Props) => {
                     <Second {...props} onSubmit={onSubmit} />
                 </CusTabPanel>
                 <CusTabPanel keepMounted value={2}>
-                    <Third />
+                    <Third onOk={() => {
+
+                        const res = { ...submitData, birthday: dayjs(submitData.birthday).format("YYYY-MM-DD") };
+                        console.log("提交的数据", res);
+                        run(res)
+                    }}>
+                        <Button type="submit"
+                            loading={loading}
+                            sx={{
+                                height: '52px',
+                                color: '#fff',
+                                backgroundColor: '#1475e1',
+                                fontSize: '18px',
+                                borderRadius: '8px'
+                            }}>创建用户</Button>
+                    </Third>
                 </CusTabPanel>
             </TabContext>
             <Box sx={{ color: '#b1bad3', fontWeight: '300', fontSize: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px', }}>

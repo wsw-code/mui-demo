@@ -32,7 +32,8 @@ const Index = () => {
         const { code, data, message } = await res.json();
         if (code === 0) {
             setAnchorEl(null);
-            setUser(null)
+            setUser(null);
+            location.reload();
         } else {
             console.log(message)
         }
@@ -120,9 +121,12 @@ const Index = () => {
                             backgroundColor: '#1475e1',
                             fontWeight: 600
                         }} onClick={() => {
-
+                            const id = ModalApi.show({
+                                content: <LoginOrRegister type="register" onClose={() => {
+                                    modalManager.destroy(id);
+                                }} />
+                            })
                         }} >注册</Button>
-                        {/* <Register /> */}
                     </Box>
                 )
             }
