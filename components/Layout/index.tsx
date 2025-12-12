@@ -286,16 +286,23 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  // 基础样式（移动端）
+  marginLeft: 0,
+  width: '100%',
+
   variants: [
+    // 桌面端打开状态
     {
       props: ({ open }) => open,
       style: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
+        [theme.breakpoints.up('md')]: {
+          marginLeft: drawerWidth,
+          width: `calc(100% - ${drawerWidth}px)`,
+          transition: theme.transitions.create(['width', 'margin'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+          }),
+        },
       },
     },
   ],
@@ -305,45 +312,14 @@ const AppBar = styled(MuiAppBar, {
 
 const Index: React.FC<React.PropsWithChildren> = (props) => {
 
-  const { setUser } = useUserStore();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const [expand, setExpand] = React.useState<string[]>([]);
-
-
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const { loading, run } = useRequest(async (props) => {
-    const res = await fetch(getPath('/api/init'), {
-      method: 'POST',
-
-      body: JSON.stringify(props)
-    })
-    const { code, data } = await res.json();
-    if (code === 0) {
-      if (data) {
-        setUser({
-          name: 'wsw',
-          email: 'xxxxx',
-          id: 'xxxx'
-        })
-      } else {
-        setUser(null)
-      }
-    }
-
-  })
-
-
 
 
 
@@ -354,7 +330,8 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
         <Toolbar
           sx={{
             display: 'flex',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+
           }}
         >
           <IconButton
