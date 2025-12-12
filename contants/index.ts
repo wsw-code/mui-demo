@@ -52,3 +52,5 @@ export const activityList = [
     path: '/5.png',
   },
 ];
+
+export const drawerWidth = 260;

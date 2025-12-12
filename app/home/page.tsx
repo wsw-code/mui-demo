@@ -2,11 +2,9 @@ import { Box } from '@mui/material';
 import CardList from '@/components/CardList';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import { GameItem } from '@/type';
-
 import { getPath } from '@/utils';
 import { activityList, activityProps, gameCardProps } from '@/contants';
 import withPageAnimation from '@/components/WithPageAnimation';
-// app/components/LinkExample.jsx
 import GameCard from '@/components/GameCard';
 import Link from 'next/link';
 import GameCardBtn from '@/svg/gameCardBtn';
