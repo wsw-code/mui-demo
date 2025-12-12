@@ -52,9 +52,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({ children, open = fals
                     display: ['']
                 }}
 
-            >
-
-            </Box>
+            ></Box>
             <Box
                 component="aside"
                 sx={[

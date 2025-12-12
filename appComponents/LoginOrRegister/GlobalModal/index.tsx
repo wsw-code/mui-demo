@@ -25,7 +25,6 @@ class ModalManager {
     private modals: Array<{ id: string; config: ModalConfig }> = []
     private listeners: Set<(modals: any[]) => void> = new Set()
 
-    // 显示模态框（类似 antd 的 Modal.confirm/info/success/error/warning）
     open(config: ModalConfig): string {
         const id = `modal-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
         this.modals.push({ id, config })
@@ -98,11 +97,7 @@ function MuiModal({ id, config, onDestroy }: {
         content,
     } = config
 
-
-
     const modalContent = (
-
-
         <SparkModal
             open={open}
             onClose={() => {
@@ -127,16 +122,12 @@ function MuiModal({ id, config, onDestroy }: {
                         transform: 'translateY(0)',
                     }
                 },
-
-                // 应用动画
                 animation: 'fadeInUp 0.25s ease-out forwards',
             }}
-
         >
             {content}
         </SparkModal>
     )
-
     return createPortal(modalContent, document.body)
 }
 

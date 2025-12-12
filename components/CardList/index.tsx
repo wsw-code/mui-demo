@@ -31,7 +31,6 @@ const Index = ({ title, icon, children, wrapperSxProps = {} }: Props) => {
         threshold: 0.9,
     });
 
-
     const scroll = (direction: 'left' | 'right') => {
         if (ref.current) {
             if (direction === 'left') {
@@ -42,7 +41,6 @@ const Index = ({ title, icon, children, wrapperSxProps = {} }: Props) => {
         }
     }
 
-
     useEffect(() => {
         if (ref.current) {
             firstRef(ref.current?.children[0])
@@ -50,8 +48,6 @@ const Index = ({ title, icon, children, wrapperSxProps = {} }: Props) => {
         }
 
     }, [children])
-
-
 
     return (
         <Box sx={{
@@ -118,7 +114,6 @@ const Index = ({ title, icon, children, wrapperSxProps = {} }: Props) => {
                 </ButtonGroup>
             </Box>
 
-
             <Box
                 component="div"
                 ref={ref}
@@ -138,7 +133,6 @@ const Index = ({ title, icon, children, wrapperSxProps = {} }: Props) => {
                         padding: '0 4%',
                     },
                     ...wrapperSxProps
-                    // grid-auto-columns
                 }}>
                 {children}
             </Box>

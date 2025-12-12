@@ -23,7 +23,6 @@ export type ModalProps = {
 
 const Index = ({ open, title, contentSxProps, headerSxProps, wrapperSxProps = {}, onClose, children }: ModalProps) => {
 
-    // const [open, setOpen] = useState(false);
     return (
         <Modal
             open={open}
@@ -37,9 +36,6 @@ const Index = ({ open, title, contentSxProps, headerSxProps, wrapperSxProps = {}
             }}
         >
             <Box sx={{
-
-
-                // transform: 'translate(-50%, -50%)',
                 backgroundColor: '#0f212e',
                 borderRadius: '10px',
                 overflow: 'hidden',
@@ -56,7 +52,6 @@ const Index = ({ open, title, contentSxProps, headerSxProps, wrapperSxProps = {}
                     padding: "0 30px",
                     color: '#fff',
                     ...headerSxProps
-
                 }}>
                     <Box>{title}</Box>
                     <CloseIcon sx={{ cursor: 'pointer' }} onClick={() => {

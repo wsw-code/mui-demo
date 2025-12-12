@@ -85,14 +85,11 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                             }
                                                             if (el.children) {
                                                                 const expandList = menuMap.get(el.menuKey);
-
                                                                 if (expandList) {
                                                                     onExpandChange?.()
-
                                                                     if (expandList.every(el => expand.includes(el))) {
                                                                         setExpand?.([])
                                                                     } else {
-
                                                                         setExpand?.(expandList)
                                                                     }
                                                                 }
@@ -104,11 +101,7 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                                 minHeight: 48,
                                                                 position: 'relative'
                                                             },
-                                                            open
-                                                                ? {
-                                                                    justifyContent: 'initial',
-                                                                }
-                                                                : {},
+                                                            open? {ustifyContent: 'initial'}: {},
                                                         ]}
 
                                                     >
@@ -119,13 +112,7 @@ const Index = ({ open, menuList, showText = true, onExpandChange, expand = [], s
                                                                     justifyContent: 'center',
                                                                     color: '#fff'
                                                                 },
-                                                                open
-                                                                    ? {
-                                                                        mr: 3,
-                                                                    }
-                                                                    : {
-                                                                        mr: 'auto',
-                                                                    },
+                                                                open? {mr: 3}: {mr: 'auto'},
                                                             ]}
                                                         >
                                                             {React.createElement(el.Icon)}

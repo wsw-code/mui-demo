@@ -34,13 +34,7 @@ const props = {
     ]
 }
 
-const num = 600
-
-
-
 const Index = () => {
-
-
 
     return (
         <Box sx={{ color: '#fff', backgroundColor: '#091d2a', display: 'flex', justifyContent: 'center', padding: '16px', paddingTop: '32px' }}>
@@ -54,9 +48,6 @@ const Index = () => {
                 width: '100%',
                 gridTemplateColumns: ["1fr", "repeat(auto-fit,minmax(14ch,1fr))"],
                 gap: ["10px", "0px"]
-
-
-
             }}>
                 {
                     [1, 2, 3, 4, 5, 6].map(el => (

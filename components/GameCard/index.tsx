@@ -36,8 +36,6 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({
           paddingTop: "134%",
         },
         position: "relative",
-        // borderRadius: '8px',
-        // overflow: 'hidden',
         ...wrapperSx,
       }}
     >
@@ -51,11 +49,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({
             position:'absolute',
             top:'0px',
             left:'0px',
-            "&:hover": animate
-                ? {
-                    transform: "translateY(-8px)",
-                }
-                : {},
+            "&:hover": animate? {transform: "translateY(-8px)"}:{},
         }}
       >
         <Box
