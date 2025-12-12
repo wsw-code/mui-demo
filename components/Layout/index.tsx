@@ -51,7 +51,7 @@ const AppBar = styled(MuiAppBar, {
     {
       props: ({ open }) => open,
       style: {
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
           marginLeft: drawerWidth,
           width: `calc(100% - ${drawerWidth}px)`,
           transition: theme.transitions.create(['width', 'margin'], {
@@ -105,6 +105,9 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
       </AppBar>
       <SparkSiderBar
         open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
         header={
           <DrawerHeader
             sx={{

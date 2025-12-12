@@ -1,13 +1,11 @@
 import { Box, SxProps, Theme } from '@mui/material';
-import MenuList from '@/components/MenuList';
-import React, { useState } from 'react';
-import { MenuItem } from '@/type';
-import { useRouter, usePathname } from 'next/navigation';
+import React from 'react';
 
 export type Props = {
   open?: boolean;
   sx?: SxProps;
   header?: React.ReactNode;
+  onClose?: () => void;
 };
 
 const animationProps: SxProps<Theme> = (theme) => ({
@@ -25,6 +23,7 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({
   open = false,
   sx = {},
   header,
+  onClose,
 }) => {
   return (
     <Box
@@ -49,6 +48,9 @@ const Index: React.FC<React.PropsWithChildren<Props>> = ({
             display: 'none',
           },
           display: [''],
+        }}
+        onClick={() => {
+          onClose?.();
         }}
       ></Box>
       <Box
