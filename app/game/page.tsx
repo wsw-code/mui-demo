@@ -1,15 +1,7 @@
-import { Box } from "@mui/material";
-
+import { Box } from '@mui/material';
 
 const Index = async () => {
-
-
-    return (
-        <Box sx={{color:'#fff'}}>
-            GAME PAGE
-        </Box>
-    )
-}
-
+  return <Box sx={{ color: '#fff' }}>GAME PAGE</Box>;
+};
 
 export default Index;

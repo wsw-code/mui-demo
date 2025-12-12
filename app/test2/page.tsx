@@ -1,15 +1,7 @@
-import { Box } from "@mui/material"
-
-
-
+import { Box } from '@mui/material';
 
 const Index = () => {
+  return <Box sx={{ color: '#fff' }}>Test 2</Box>;
+};
 
-
-    return (
-        <Box sx={{ color: '#fff' }}>Test 2</Box>
-    )
-}
-
-
-export default Index
+export default Index;

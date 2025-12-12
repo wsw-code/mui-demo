@@ -32,7 +32,8 @@ const CusTabPanel = styled(TabPanel)(({ theme }) => {
   };
 });
 
-const Index = ({ onClose, onOk, type = "login" }: Props) => {
+const Index = (props: Props) => {
+  const { type = "login" } = props;
   const [status, setStatus] = useState<"login" | "register">(type);
 
   const toggle = () => {
@@ -43,10 +44,10 @@ const Index = ({ onClose, onOk, type = "login" }: Props) => {
     <Box sx={{ height: "100%" }}>
       <TabContext value={status}>
         <CusTabPanel keepMounted value={"login"}>
-          <Login setStatus={toggle} onClose={onClose} onOk={onOk} />
+          <Login setStatus={toggle} {...props} />
         </CusTabPanel>
         <CusTabPanel keepMounted value={"register"}>
-          <Register setStatus={toggle} onClose={onClose} onOk={onOk} />
+          <Register setStatus={toggle} {...props} />
         </CusTabPanel>
       </TabContext>
     </Box>

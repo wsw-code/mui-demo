@@ -1,6 +1,3 @@
+import Home from '@/app/home/page';
 
-
-import Home from '@/app/home/page'
-
-
-export default Home
+export default Home;

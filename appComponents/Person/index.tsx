@@ -1,15 +1,13 @@
-"use client";
+'use client';
 
-import { Box, Button, Menu, MenuItem } from "@mui/material";
-import { Avatar } from "@mui/material";
-import useUserStore from "@/store/user";
-import Register from "@/appComponents/LoginOrRegister/Register";
-import Login from "@/appComponents/LoginOrRegister/Login";
-import React from "react";
-import { getPath } from "@/utils";
-import { useRequest } from "ahooks";
-import { ModalApi, modalManager } from "@/appComponents/LoginOrRegister/GlobalModal";
-import LoginOrRegister from "@/appComponents/LoginOrRegister";
+import { Box, Button, Menu, MenuItem } from '@mui/material';
+import { Avatar } from '@mui/material';
+import useUserStore from '@/store/user';
+import React from 'react';
+import { getPath } from '@/utils';
+import { useRequest } from 'ahooks';
+import { ModalApi, modalManager } from '@/appComponents/LoginOrRegister/GlobalModal';
+import LoginOrRegister from '@/appComponents/LoginOrRegister';
 
 const Index = () => {
   const { user, setUser } = useUserStore();
@@ -24,8 +22,8 @@ const Index = () => {
 
   const { loading, run } = useRequest(
     async () => {
-      const res = await fetch(getPath("/api/logout"), {
-        method: "POST",
+      const res = await fetch(getPath('/api/logout'), {
+        method: 'POST',
       });
       const { code, data, message } = await res.json();
       if (code === 0) {
@@ -47,9 +45,9 @@ const Index = () => {
             onClick={handleClick}
             id="avator"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
             }}
           >
             <Avatar alt="用户头像" />
@@ -59,22 +57,22 @@ const Index = () => {
           <Menu
             slotProps={{
               list: {
-                "aria-labelledby": "avator",
+                'aria-labelledby': 'avator',
               },
             }}
             sx={{
-              "& .MuiPaper-root": {
-                backgroundColor: "#3a4c58",
-                color: "#fff",
+              '& .MuiPaper-root': {
+                backgroundColor: '#3a4c58',
+                color: '#fff',
                 // 更多样式
-                borderRadius: "8px",
+                borderRadius: '8px',
               },
-              "& .MuiMenuItem-root": {
-                "&:hover": {
-                  backgroundColor: "#4a5c68",
+              '& .MuiMenuItem-root': {
+                '&:hover': {
+                  backgroundColor: '#4a5c68',
                 },
-                "&.Mui-selected": {
-                  backgroundColor: "#4a5c68",
+                '&.Mui-selected': {
+                  backgroundColor: '#4a5c68',
                 },
               },
             }}
@@ -86,7 +84,7 @@ const Index = () => {
           >
             <MenuItem
               onClick={() => {
-                localStorage.removeItem("store-data");
+                localStorage.removeItem('store-data');
                 run();
               }}
             >
@@ -97,14 +95,14 @@ const Index = () => {
       ) : (
         <Box
           sx={{
-            display: "flex",
-            gap: "20px",
+            display: 'flex',
+            gap: '20px',
           }}
         >
           <Button
             sx={{
-              color: "#fff",
-              backgroundColor: "#2f4553",
+              color: '#fff',
+              backgroundColor: '#2f4553',
               fontWeight: 600,
             }}
             onClick={() => {
@@ -123,8 +121,8 @@ const Index = () => {
           </Button>
           <Button
             sx={{
-              color: "#fff",
-              backgroundColor: "#1475e1",
+              color: '#fff',
+              backgroundColor: '#1475e1',
               fontWeight: 600,
             }}
             onClick={() => {

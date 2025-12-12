@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   Box,
@@ -9,28 +9,28 @@ import {
   Divider,
   Typography,
   styled,
-} from "@mui/material";
-import { useState } from "react";
-import { useRequest } from "ahooks";
-import { useForm, Controller } from "react-hook-form";
-import { InputLabel } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import useUserStore from "@/store/user";
-import { getPath } from "@/utils";
-import { toast } from "@/lib/toast";
-import UserSvg from "@/svg/user";
-import GoogleLogo from "@/svg/google";
+} from '@mui/material';
+import { useState } from 'react';
+import { useRequest } from 'ahooks';
+import { useForm, Controller } from 'react-hook-form';
+import { InputLabel } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import useUserStore from '@/store/user';
+import { getPath } from '@/utils';
+import { toast } from '@/lib/toast';
+import UserSvg from '@/svg/user';
+import GoogleLogo from '@/svg/google';
 
 const CustomButton = styled(Button)(({ theme }) => ({
-  color: "#fff",
+  color: '#fff',
   border: 0,
-  borderRadius: "8px",
-  background: "#314753",
-  height: "48px",
-  fontSize: "18px",
+  borderRadius: '8px',
+  background: '#314753',
+  height: '48px',
+  fontSize: '18px',
   // 悬停效果
-  "&:hover": {
-    background: "#577287",
+  '&:hover': {
+    background: '#577287',
   },
 }));
 
@@ -50,17 +50,17 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
     reset,
   } = useForm({
     defaultValues: {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     },
   });
 
   const { loading, run } = useRequest(
     async (props) => {
-      const res = await fetch(getPath("/api/login"), {
-        method: "POST",
+      const res = await fetch(getPath('/api/login'), {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(props),
       });
@@ -70,8 +70,8 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
         onOk?.();
         setUser({
           name: data.username,
-          email: "xxxxx",
-          id: "xxxx",
+          email: 'xxxxx',
+          id: 'xxxx',
         });
         reset();
       } else {
@@ -89,19 +89,19 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
         }}
       >
         <Controller
           name="username"
           control={control}
           rules={{
-            required: "用户名必填",
+            required: '用户名必填',
             minLength: {
               value: 3,
-              message: "至少3个字符",
+              message: '至少3个字符',
             },
           }}
           render={({ field }) => (
@@ -111,7 +111,7 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
                 size="small"
                 {...field}
                 sx={{
-                  marginTop: "5px",
+                  marginTop: '5px',
                 }}
                 // label="用户名"
                 error={Boolean(errors.username)}
@@ -127,10 +127,10 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
           name="password"
           control={control}
           rules={{
-            required: "密码必填",
+            required: '密码必填',
             minLength: {
               value: 8,
-              message: "至少8个字符",
+              message: '至少8个字符',
             },
           }}
           render={({ field }) => (
@@ -140,10 +140,10 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
                 {...field}
                 size="small"
                 sx={{
-                  marginTop: "5px",
+                  marginTop: '5px',
                 }}
                 variant="outlined"
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 error={Boolean(errors.password)}
                 helperText={errors.password?.message}
                 fullWidth
@@ -160,9 +160,9 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
                           // onMouseDown={handleMouseDownPassword}
                           edge="end"
                           sx={{
-                            color: "rgba(255,255,255,0.5)",
-                            "&:hover": {
-                              color: "#fff",
+                            color: 'rgba(255,255,255,0.5)',
+                            '&:hover': {
+                              color: '#fff',
                             },
                           }}
                         >
@@ -185,11 +185,11 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
           loading={loading}
           type="submit"
           sx={{
-            height: "52px",
-            color: "#fff",
-            backgroundColor: "#1475e1",
-            fontSize: "18px",
-            borderRadius: "8px",
+            height: '52px',
+            color: '#fff',
+            backgroundColor: '#1475e1',
+            fontSize: '18px',
+            borderRadius: '8px',
           }}
           onClick={() => {}}
         >
@@ -198,51 +198,45 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
       </Box>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-          marginTop: "20px",
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          marginTop: '20px',
         }}
       >
         <Divider
           component="div"
           role="presentation"
           sx={{
-            background: "transparent",
-            "&:before": { borderColor: "#324854" },
-            "&:after": { borderColor: "#324854" },
+            background: 'transparent',
+            '&:before': { borderColor: '#324854' },
+            '&:after': { borderColor: '#324854' },
           }}
         >
-          <Typography sx={{ color: "#b1bad3", fontWeight: 300 }}>
-            或者使用
-          </Typography>
+          <Typography sx={{ color: '#b1bad3', fontWeight: 300 }}>或者使用</Typography>
         </Divider>
-        <CustomButton startIcon={<UserSvg />}>
-          使用密钥登录
-        </CustomButton>
-        <CustomButton startIcon={<GoogleLogo />}>
-          使用以下方式登录 Google
-        </CustomButton>
+        <CustomButton startIcon={<UserSvg />}>使用密钥登录</CustomButton>
+        <CustomButton startIcon={<GoogleLogo />}>使用以下方式登录 Google</CustomButton>
         <CustomButton>用另一种方式签名</CustomButton>
       </Box>
       <Box
         sx={{
-          color: "#b1bad3",
-          fontWeight: "300",
-          fontSize: "16px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "110px",
+          color: '#b1bad3',
+          fontWeight: '300',
+          fontSize: '16px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '110px',
         }}
       >
-        还未有账户？{" "}
+        还未有账户？{' '}
         <Button
           sx={{
-            color: "#fff",
-            fontWeight: "600",
-            fontSize: "16px",
-            padding: "0px",
+            color: '#fff',
+            fontWeight: '600',
+            fontSize: '16px',
+            padding: '0px',
           }}
           onClick={() => {
             setStatus();

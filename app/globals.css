@@ -1,9 +1,10 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --ds-heading-sm: 700 1rem / 1.5rem "proxima-nova", ui-sans-serif, -apple-system, system-ui, sans-serif;
+  --ds-heading-sm: 700 1rem / 1.5rem 'proxima-nova', ui-sans-serif, -apple-system, system-ui,
+    sans-serif;
 }
 
 @theme inline {
@@ -19,8 +20,6 @@
     --foreground: #ededed;
   }
 }
-
-
 
 html,
 body {

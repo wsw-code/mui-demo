@@ -1,7 +1,14 @@
-"use client";
+'use client';
 
 import * as React from 'react';
-import { styled, useTheme, Theme, CSSObject, ThemeProvider, createTheme } from '@mui/material/styles';
+import {
+  styled,
+  useTheme,
+  Theme,
+  CSSObject,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,20 +21,20 @@ import { useRouter, usePathname } from 'next/navigation';
 import Person from '@/appComponents/Person';
 import { useRequest } from 'ahooks';
 import { getPath } from '@/utils';
-import useUserStore from '@/store/user'
-import ToastContainer from '@/components/ToastContainer'
-import type { } from '@mui/lab/themeAugmentation';
-import SparkSiderBar from '@/components/SparkSiderBar'
+import useUserStore from '@/store/user';
+import ToastContainer from '@/components/ToastContainer';
+import type {} from '@mui/lab/themeAugmentation';
+import SparkSiderBar from '@/components/SparkSiderBar';
 import MenuList from '@/components/MenuList';
-import { MuiModalRenderer } from '@/appComponents/LoginOrRegister/GlobalModal'
-import { Suspense } from "react";
-import Loading from '@/components/Loading'
+import { MuiModalRenderer } from '@/appComponents/LoginOrRegister/GlobalModal';
+import { Suspense } from 'react';
+import Loading from '@/components/Loading';
 
 const MainColor = '#1a2c38';
 
 const DrawerColor = '#0d1c28';
 
-const hoverColor = '#2e4453'
+const hoverColor = '#2e4453';
 
 const SparkTheme = createTheme({
   palette: {
@@ -61,36 +68,35 @@ const SparkTheme = createTheme({
     // button:{
     //   fontWeight:600
     // }
-    fontWeightRegular: 600
+    fontWeightRegular: 600,
   },
   components: {
     MuiButton: {
       styleOverrides: {
-
         root: {
           textTransform: 'none',
           color: '#ffffff',
         },
         loadingIndicator: {
-          color: '#fff'
-        }
-      }
+          color: '#fff',
+        },
+      },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
           backgroundColor: DrawerColor, // 深色背景
-        }
-      }
+        },
+      },
     },
     MuiSvgIcon: {
       styleOverrides: {
         root: {
           // color: '#ffffff', // 图标白色
           // ':disabled': 'rgba(255, 255, 255, 0.5)'
-          cursor: 'pointer'
-        }
-      }
+          cursor: 'pointer',
+        },
+      },
     },
     MuiListItemButton: {
       styleOverrides: {
@@ -104,7 +110,7 @@ const SparkTheme = createTheme({
           '&.Mui-selected': {
             backgroundColor: hoverColor, // 选中状态使用主色
           },
-          'padding': '8px 12px'
+          padding: '8px 12px',
         },
       },
     },
@@ -113,7 +119,6 @@ const SparkTheme = createTheme({
         root: {
           '&:hover': {
             backgroundColor: hoverColor, // 使用主色
-
           },
           //   'paddingLeft':12,
           //     'paddingRight':12,
@@ -125,8 +130,8 @@ const SparkTheme = createTheme({
         root: {
           paddingTop: 0,
           paddingBottom: 0,
-        }
-      }
+        },
+      },
     },
 
     MuiDivider: {
@@ -134,8 +139,8 @@ const SparkTheme = createTheme({
         root: {
           backgroundColor: '#2e4453', // 浅色分割线
           // height: 2,
-        }
-      }
+        },
+      },
     },
 
     MuiInputLabel: {
@@ -151,9 +156,9 @@ const SparkTheme = createTheme({
             '& .MuiFormLabel-asterisk': {
               color: 'red', // 星号颜色
             },
-          }
-        }
-      }
+          },
+        },
+      },
     },
     MuiOutlinedInput: {
       styleOverrides: {
@@ -168,7 +173,6 @@ const SparkTheme = createTheme({
           },
           '&.Mui-focused': {
             borderColor: '#557086',
-
           },
 
           '& .MuiInputLabel-root:hover': {
@@ -188,19 +192,18 @@ const SparkTheme = createTheme({
               borderColor: '#ff6b6b', // 或者使用 theme.palette.error.main
               borderWidth: 0,
             },
-          }
-
-        }
-      }
+          },
+        },
+      },
     },
     MuiFormHelperText: {
       styleOverrides: {
         root: {
           paddingLeft: '0px',
           marginLeft: '0px',
-          fontSize: '14px'
-        }
-      }
+          fontSize: '14px',
+        },
+      },
     },
     MuiTab: {
       styleOverrides: {
@@ -219,7 +222,7 @@ const SparkTheme = createTheme({
           '&.Mui-selected': {
             color: '#fff',
             background: '#2e4453',
-            borderRadius: '50vh'
+            borderRadius: '50vh',
             // fontWeight: 600,
           },
         },
@@ -230,38 +233,28 @@ const SparkTheme = createTheme({
         root: {
           paddingLeft: '0px',
           paddingRight: '0px',
-
         },
-
-      }
+      },
     },
     MuiTableContainer: {
       styleOverrides: {
         root: {
-          backgroundColor: "#0f212e"
-        }
-      }
+          backgroundColor: '#0f212e',
+        },
+      },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
           background: '#444',
-          "&.Mui-selected": {
-
-          }
-        }
-
-      }
+          '&.Mui-selected': {},
+        },
+      },
     },
-
-
-
-  }
+  },
 });
 
 const drawerWidth = 260;
-
-
 
 const DrawerHeader = styled('div')(({ theme }) => {
   return {
@@ -271,7 +264,7 @@ const DrawerHeader = styled('div')(({ theme }) => {
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-  }
+  };
 });
 
 interface AppBarProps extends MuiAppBarProps {
@@ -308,10 +301,7 @@ const AppBar = styled(MuiAppBar, {
   ],
 }));
 
-
-
 const Index: React.FC<React.PropsWithChildren> = (props) => {
-
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -321,9 +311,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
     setOpen(false);
   };
 
-
-
-
   return (
     <ThemeProvider theme={SparkTheme}>
       <AppBar position="fixed" open={open}>
@@ -331,7 +318,6 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
           sx={{
             display: 'flex',
             justifyContent: 'space-between',
-
           }}
         >
           <IconButton
@@ -357,48 +343,53 @@ const Index: React.FC<React.PropsWithChildren> = (props) => {
       <SparkSiderBar
         open={open}
         header={
-          <DrawerHeader sx={{
-            backgroundColor: '#0f212e',
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}>
+          <DrawerHeader
+            sx={{
+              backgroundColor: '#0f212e',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
             <IconButton onClick={handleDrawerClose}>
               <MenuIcon sx={{ color: '#fff' }} />
             </IconButton>
           </DrawerHeader>
         }
       >
-        <MenuList expand={expand} setExpand={setExpand} open={open} menuList={menuList} onExpandChange={() => {
-          if (!open) {
-            setOpen(true)
-          }
-        }} />
+        <MenuList
+          expand={expand}
+          setExpand={setExpand}
+          open={open}
+          menuList={menuList}
+          onExpandChange={() => {
+            if (!open) {
+              setOpen(true);
+            }
+          }}
+        />
       </SparkSiderBar>
-      <Box component="main" sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1, height: '100%',
-        paddingTop: '64px',
-        backgroundColor: '#1a2c38',
-        overflowY: 'auto',
-        '&::-webkit-scrollbar': {
-          display: 'none',
-        },
-      }} >
-        <Box sx={[
-          { flexGrow: 1 }
-        ]}>
-
-          {props.children}
-
-        </Box>
+      <Box
+        component="main"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          height: '100%',
+          paddingTop: '64px',
+          backgroundColor: '#1a2c38',
+          overflowY: 'auto',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }}
+      >
+        <Box sx={[{ flexGrow: 1 }]}>{props.children}</Box>
         <ToastContainer />
         <Footer />
       </Box>
       <MuiModalRenderer />
-    </ThemeProvider >
+    </ThemeProvider>
   );
-}
+};
 
-export default Index
-
+export default Index;
