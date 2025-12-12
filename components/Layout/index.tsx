@@ -168,10 +168,7 @@ const SparkTheme = createTheme({
           },
           '&.Mui-focused': {
             borderColor: '#557086',
-            // 注意：对于 OutlinedInput，需要定位到 fieldset
-            // '& .MuiOutlinedInput-notchedOutline': {
-            //   borderColor: '#557086',
-            // },
+
           },
 
           '& .MuiInputLabel-root:hover': {
@@ -238,20 +235,26 @@ const SparkTheme = createTheme({
 
       }
     },
-    // MuiTable: {
-    //   styleOverrides: {
-    //     root: {
-    //       // backgroundColor: "#0f212e"
-    //     }
-    //   }
-    // },
     MuiTableContainer: {
       styleOverrides: {
         root: {
           backgroundColor: "#0f212e"
         }
       }
-    }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          background: '#444',
+          "&.Mui-selected": {
+
+          }
+        }
+
+      }
+    },
+
+
 
   }
 });

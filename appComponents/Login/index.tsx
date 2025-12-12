@@ -190,10 +190,12 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
                 <CustomButton startIcon={<GoogleLogo />} loading={loading}  >使用以下方式登录 Google</CustomButton>
                 <CustomButton loading={loading}  >用另一种方式签名</CustomButton>
             </Box>
-            <Box sx={{ color: '#b1bad3', fontWeight: '300', fontSize: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px', }}>
-                还未有账户？ <Button sx={{ color: '#fff', fontWeight: '300', fontSize: '16px', padding: '0px' }} onClick={() => { setStatus() }} >注册账户</Button>
+            <Box sx={{ color: '#b1bad3', fontWeight: '300', fontSize: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '110px', }}>
+                还未有账户？ <Button sx={{ color: '#fff', fontWeight: '600', fontSize: '16px', padding: '0px' }} onClick={() => { setStatus() }} >注册账户</Button>
             </Box>
         </form>
+
+
 
     )
 }

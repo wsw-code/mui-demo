@@ -4,6 +4,8 @@ import { Box, Button, IconButton, InputAdornment, Modal, Snackbar, TextField, Di
 import Login from '@/appComponents/Login'
 import { useState } from "react";
 import Register from '@/appComponents/Register'
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
 
 
 
@@ -12,6 +14,15 @@ export type Props = {
     onClose?: () => void;
     onOk?: () => void;
 }
+
+
+const CusTabPanel = styled(TabPanel)(({ theme }) => {
+    return {
+        paddingTop: '0px',
+        paddingBottom: '0px',
+        height: '100%'
+    }
+});
 
 const Index = ({ onClose, onOk }: Props) => {
 
@@ -25,15 +36,22 @@ const Index = ({ onClose, onOk }: Props) => {
 
     return (
 
-        <Box>
-            {
+        <Box sx={{ height: '100%' }}>
+            {/* {
                 status === "login" ? (
                     <Login setStatus={toggle} onClose={onClose} onOk={onOk} />
                 ) : <Register setStatus={toggle} onClose={onClose} onOk={onOk} />
-            }
+            } */}
 
+            <TabContext value={status}>
+                <CusTabPanel keepMounted value={"login"}>
+                    <Login setStatus={toggle} onClose={onClose} onOk={onOk} />
+                </CusTabPanel>
+                <CusTabPanel keepMounted value={"register"}>
+                    <Register setStatus={toggle} onClose={onClose} onOk={onOk} />
+                </CusTabPanel>
+            </TabContext>
         </Box>
-
 
 
     )
