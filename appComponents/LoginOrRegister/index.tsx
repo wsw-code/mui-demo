@@ -12,9 +12,9 @@ import {
   Typography,
   styled,
 } from "@mui/material";
-import Login from "@/appComponents/Login";
+import Login from "@/appComponents/LoginOrRegister/Login";
 import { useState } from "react";
-import Register from "@/appComponents/Register";
+import Register from "@/appComponents/LoginOrRegister/Register";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 

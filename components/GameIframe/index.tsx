@@ -3,7 +3,7 @@ import { Box } from "@mui/material"
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { useEffect, useRef, useState } from "react";
 import useUserStore from '@/store/user';
-import { ModalApi, modalManager } from "@/components/Modal";
+import { ModalApi, modalManager } from "@/appComponents/LoginOrRegister/GlobalModal";
 import LoginOrRegister from "@/appComponents/LoginOrRegister";
 
 

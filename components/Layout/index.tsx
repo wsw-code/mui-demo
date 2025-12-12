@@ -19,7 +19,7 @@ import ToastContainer from '@/components/ToastContainer'
 import type { } from '@mui/lab/themeAugmentation';
 import SparkSiderBar from '@/components/SparkSiderBar'
 import MenuList from '@/components/MenuList';
-import { MuiModalRenderer } from '@/components/Modal'
+import { MuiModalRenderer } from '@/appComponents/LoginOrRegister/GlobalModal'
 import { Suspense } from "react";
 import Loading from '@/components/Loading'
 

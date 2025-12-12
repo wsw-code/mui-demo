@@ -1,36 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 游戏站 (My Stake)
 
-## Getting Started
+一个现代化的在线游戏平台，基于 Next.js + Material-UI 构建，提供丰富的游戏浏览和试玩功能。
 
-First, run the development server:
+## ✨ 主要功能
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 首页展示热门游戏、分类和统计数据
+- 查看游戏详细信息、评分和游玩次数
+- 登录后可以试玩游戏
+- 登录和注册功能，使用手机号或邮箱（登陆账号密码为admin/12345678）
+- 使用 Zustand+Cookie 进行状态管理，支持持久化存储
+
+## 🚀 技术栈
+
+- **Next.js 16** -  App Router
+- **Material-UI** - UI组件库，支持组件主题配置化
+- **TypeScript** - 类型安全的 JavaScript
+- **Zustand** - 轻量级状态管理库
+- **pnpm** - 快速、高效的包管理器
+- **ESLint** - 代码检查和质量保证
+
+## 📁 项目结构
+
+```Markdown
+ # 项目目录结构
+
+```
+.
+├── 📁 app
+    ├── 📁 api // 接口
+    │   ├── 📁 game
+    │   │   └── 📁 [id]
+    │   │   │   └── 📄 route.ts // 游戏详情接口
+    │   ├── 📁 init
+    │   │   └── 📄 route.ts // 初始化接口
+    │   ├── 📁 list
+    │   │   └── 📄 route.ts // 游戏列表接口
+    │   ├── 📁 login
+    │   │   └── 📄 route.ts // 登陆接口
+    │   ├── 📁 logout
+    │   │   └── 📄 route.ts // 登出接口
+    │   └── 📁 register
+    │   │   └── 📄 route.ts // 注册接口
+    ├── 📁 game 
+    │   ├── 📁 [id]
+    │   │   └── 📄 page.tsx //游戏试玩页面 
+    │   └── 📄 page.tsx // 无内容-用于展示路由切换
+    ├── 📁 gameDetail 
+    │   └── 📁 [id]
+    │   │   └── 📄 page.tsx  //游戏详情页面
+    ├── 📁 home
+    │   └── 📄 page.tsx // 主页
+    ├── 📁 test
+    │   └── 📄 page.tsx // 无内容-用于展示路由切换
+    ├── 📁 test2
+    │   └── 📄 page.tsx // 无内容-用于展示路由切换
+    ├── 📄 favicon.ico
+    ├── 📄 globals.css 
+    ├── 📄 layout.tsx
+    ├── 📄 loading.tsx // 路由加载页面
+    └── 📄 page.tsx 
+├── 📁 appComponents // 业务组件
+    ├── 📁 GameTabs // 游戏详情组件
+    │   └── 📄 index.tsx // 
+    ├── 📁 LoginOrRegister // 登陆/注册
+    │   ├── 📁 GlobalModal // 登陆/注册全局调用实例/组件渲染
+    │   │   └── 📄 index.tsx
+    │   ├── 📁 Login //登陆模块
+    │   │   └── 📄 index.tsx
+    │   ├── 📁 Register // 注册模块
+    │   │   └── 📄 index.tsx
+    │   └── 📄 index.tsx
+    ├── 📁 Person
+    │   └── 📄 index.tsx // header右上角模块
+    ├── 📁 Register
+    │   └── 📄 index.tsx // 注册模块
+    └── 📁 TryPlayButton // 试玩按钮
+    │   └── 📄 index.tsx
+├── 📁 components // 基础组件
+    ├── 📁 AccordionList // footer信息展示组件
+    │   └── 📄 index.tsx
+    ├── 📁 AnimateComponent // 路由切换动画组件
+    │   └── 📄 index.tsx
+    ├── 📁 CardList // 游戏列表滚动组件
+    │   └── 📄 index.tsx
+    ├── 📁 Footer // 页面Footer
+    │   └── 📄 index.tsx
+    ├── 📁 GameCard // 游戏卡片组件
+    │   └── 📄 index.tsx
+    ├── 📁 GameIframe // 试玩区域组件
+    │   └── 📄 index.tsx
+    ├── 📁 Layout // 布局组件
+    │   └── 📄 index.tsx
+    ├── 📁 Loading // 加载页面组件
+    │   └── 📄 index.tsx
+    ├── 📁 MenuList // 左侧栏列表组件
+    │   └── 📄 index.tsx
+    ├── 📁 Modal // 弹窗组件
+    │   └── 📄 index.tsx
+    ├── 📁 SparkModal // 弹窗组件
+    │   └── 📄 index.tsx
+    ├── 📁 SparkSiderBar // 左侧栏滑动组件
+    │   └── 📄 index.tsx
+    ├── 📁 Table //表单组件
+    │   └── 📄 index.tsx
+    ├── 📁 ToastContainer // 全局message弹窗组件
+    │   └── 📄 index.tsx
+    └── 📁 WithPageAnimation // 路由切换动画HOC组件
+    │   └── 📄 index.tsx
+├── 📁 config // 配置数据
+    └── 📄 menuConfig.ts // 菜单列表数据
+├── 📁 contants // 常量
+    └── 📄 index.ts
+├── 📁 lib // toast 实例化
+    └── 📄 toast.ts
+├── 📁 mock // 虚拟数据
+    └── 📄 gameList.ts
+├── 📁 public // 素材
+├── 📁 store // 全局管理数据
+    └── 📁 user 
+    │   ├── 📄 index.ts
+    │   └── 📄 type.ts
+├── 📁 svg // svg
+
+├── 📁 type // 类型
+    └── 📄 index.ts
+├── 📁 utils // 通用函数
+    └── 📄 index.ts
+
+
+```
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ 快速开始
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 环境要求
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Node.js 18+ 
+- pnpm（推荐）或 npm
 
-## Learn More
+### 安装依赖
 
-To learn more about Next.js, take a look at the following resources:
+```Bash
+# 安装依赖
+pnpm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 开发模式
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```Bash
+# 启动开发服务器
+pnpm run dev
+```
 
-## Deploy on Vercel
+在浏览器中打开 [http://localhost:3000](http://localhost:3000)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 生产构建
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```Bash
+# 构建生产版本
+pnpm build
+
+# 启动生产服务器
+pnpm start
+```
+
+### 代码检查
+
+```Bash
+# 运行 ESLint
+pnpm lint
+```
+
+### 路由结构
+
+- `/` - 首页（热门游戏、分类、统计数据）
+- `/game` - 游戏列表页（支持搜索和分类筛选）
+- `/gameDetail/[id]` - 游戏详情页
+- `/game/[id]` - 游戏试玩页（需要登录）
+

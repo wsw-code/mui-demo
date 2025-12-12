@@ -6,9 +6,9 @@ import Link from "next/link";
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import useUserStore from '@/store/user'
 import { useRouter, usePathname } from 'next/navigation';
-import { ModalApi } from '@/components/Modal';
+import { ModalApi } from '@/appComponents/LoginOrRegister/GlobalModal';
 import LoginOrRegister from '@/appComponents/LoginOrRegister';
-import { modalManager } from '@/components/Modal';
+import { modalManager } from '@/appComponents/LoginOrRegister/GlobalModal';
 
 
 const Index = ({ data }: { data?: GameItem }) => {

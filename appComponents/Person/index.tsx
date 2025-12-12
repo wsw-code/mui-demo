@@ -3,12 +3,12 @@
 import { Box, Button, Menu, MenuItem } from "@mui/material";
 import { Avatar } from "@mui/material";
 import useUserStore from "@/store/user";
-import Register from "@/appComponents/Register";
-import Login from "@/appComponents/Login";
+import Register from "@/appComponents/LoginOrRegister/Register";
+import Login from "@/appComponents/LoginOrRegister/Login";
 import React from "react";
 import { getPath } from "@/utils";
 import { useRequest } from "ahooks";
-import { ModalApi, modalManager } from "@/components/Modal";
+import { ModalApi, modalManager } from "@/appComponents/LoginOrRegister/GlobalModal";
 import LoginOrRegister from "@/appComponents/LoginOrRegister";
 
 const Index = () => {
