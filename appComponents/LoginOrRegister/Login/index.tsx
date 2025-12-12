@@ -217,13 +217,13 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
             或者使用
           </Typography>
         </Divider>
-        <CustomButton startIcon={<UserSvg />} loading={loading}>
+        <CustomButton startIcon={<UserSvg />}>
           使用密钥登录
         </CustomButton>
-        <CustomButton startIcon={<GoogleLogo />} loading={loading}>
+        <CustomButton startIcon={<GoogleLogo />}>
           使用以下方式登录 Google
         </CustomButton>
-        <CustomButton loading={loading}>用另一种方式签名</CustomButton>
+        <CustomButton>用另一种方式签名</CustomButton>
       </Box>
       <Box
         sx={{
