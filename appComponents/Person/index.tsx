@@ -120,11 +120,7 @@ const Index = () => {
             登陆
           </Button>
           <Button
-            sx={{
-              color: '#fff',
-              backgroundColor: '#1475e1',
-              fontWeight: 600,
-            }}
+            variant="blue"
             onClick={() => {
               const id = ModalApi.show({
                 content: (

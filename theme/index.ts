@@ -1,21 +1,33 @@
 import { createTheme } from '@mui/material/styles';
 
+// 扩展 Button 组件的 variants
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    blue: true;
+    grey: true;
+  }
+}
+
 const MainColor = '#1a2c38';
 
 const DrawerColor = '#0d1c28';
 
 const hoverColor = '#2e4453';
 
+const blueColor = '#1475e1';
+
+const greyColor = '#314753';
+
+const greyColor_hover = '#577287';
+
 export const SparkTheme = createTheme({
   palette: {
     primary: {
-      main: MainColor, // 紫色
+      main: MainColor,
     },
 
     text: {
       primary: '#fff', // 主要文字白色
-      //   secondary: 'rgba(255, 255, 255, 0.7)', // 次要文字浅白色
-      //   disabled: 'rgba(255, 255, 255, 0.5)', // 禁用状态文字
     },
     // 也可以修改其他颜色
     secondary: {
@@ -35,9 +47,6 @@ export const SparkTheme = createTheme({
     },
   },
   typography: {
-    // button:{
-    //   fontWeight:600
-    // }
     fontWeightRegular: 600,
   },
   components: {
@@ -51,6 +60,27 @@ export const SparkTheme = createTheme({
           color: '#fff',
         },
       },
+      variants: [
+        {
+          props: { variant: 'blue' }, // 自定义 variant 名称
+          style: {
+            color: '#fff',
+            backgroundColor: blueColor,
+          },
+        },
+        {
+          props: { variant: 'grey' }, // 自定义 variant 名称
+          style: {
+            color: '#fff',
+            borderRadius: '8px',
+            background: greyColor,
+            // 悬停效果
+            '&:hover': {
+              background: greyColor_hover,
+            },
+          },
+        },
+      ],
     },
     MuiDrawer: {
       styleOverrides: {
@@ -74,8 +104,6 @@ export const SparkTheme = createTheme({
           textTransform: 'none',
           '&:hover': {
             backgroundColor: hoverColor, // 浅色hover效果
-            // 或者使用主题颜色
-            // backgroundColor: theme => theme.palette.primary.light + '20', // 20表示透明度
           },
           '&.Mui-selected': {
             backgroundColor: hoverColor, // 选中状态使用主色
@@ -90,8 +118,6 @@ export const SparkTheme = createTheme({
           '&:hover': {
             backgroundColor: hoverColor, // 使用主色
           },
-          //   'paddingLeft':12,
-          //     'paddingRight':12,
         },
       },
     },
@@ -216,8 +242,18 @@ export const SparkTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          background: '#444',
-          '&.Mui-selected': {},
+          background: hoverColor,
+          '& .MuiPickersDay-today': {
+            background: 'transparent',
+            borderColor: MainColor,
+            borderWidth: '2px',
+          },
+          '& .MuiTypography-caption': {
+            color: '#fff',
+          },
+          '& .MuiIconButton-root': {
+            color: '#fff',
+          },
         },
       },
     },

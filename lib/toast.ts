@@ -1,4 +1,3 @@
-// lib/toast.ts
 let toastRef: any = null;
 
 export const toast = {
@@ -7,7 +6,6 @@ export const toast = {
     toastRef = ref;
   },
 
-  // API 方法
   success(message: string) {
     toastRef?.show(message, 'success');
   },

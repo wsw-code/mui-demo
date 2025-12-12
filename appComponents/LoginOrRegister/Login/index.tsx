@@ -22,16 +22,8 @@ import UserSvg from '@/svg/user';
 import GoogleLogo from '@/svg/google';
 
 const CustomButton = styled(Button)(({ theme }) => ({
-  color: '#fff',
-  border: 0,
-  borderRadius: '8px',
-  background: '#314753',
   height: '48px',
   fontSize: '18px',
-  // 悬停效果
-  '&:hover': {
-    background: '#577287',
-  },
 }));
 
 export type Props = {
@@ -186,12 +178,10 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
           type="submit"
           sx={{
             height: '52px',
-            color: '#fff',
-            backgroundColor: '#1475e1',
             fontSize: '18px',
             borderRadius: '8px',
           }}
-          onClick={() => {}}
+          variant="blue"
         >
           登录
         </Button>
@@ -215,9 +205,13 @@ const Index = ({ onClose, onOk, setStatus }: Props) => {
         >
           <Typography sx={{ color: '#b1bad3', fontWeight: 300 }}>或者使用</Typography>
         </Divider>
-        <CustomButton startIcon={<UserSvg />}>使用密钥登录</CustomButton>
-        <CustomButton startIcon={<GoogleLogo />}>使用以下方式登录 Google</CustomButton>
-        <CustomButton>用另一种方式签名</CustomButton>
+        <CustomButton variant="grey" startIcon={<UserSvg />}>
+          使用密钥登录
+        </CustomButton>
+        <CustomButton variant="grey" startIcon={<GoogleLogo />}>
+          使用以下方式登录 Google
+        </CustomButton>
+        <CustomButton variant="grey">用另一种方式签名</CustomButton>
       </Box>
       <Box
         sx={{
